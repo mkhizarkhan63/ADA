@@ -8,6 +8,6 @@ namespace ADA.web.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-        public int TestingW { get; set; }
+       
     }
 }
