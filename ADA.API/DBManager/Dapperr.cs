@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using EnvicreteWebApi.DBManager;
+using ADA.API.DBManager;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using static Dapper.SqlMapper;
 
 namespace ADA.API.DBManager
 {
-    public class Dapperr:IDapper
+    public class Dapperr : IDapper
     {
 
         private string Connectionstring = "DefaultConnection";
@@ -207,11 +207,11 @@ namespace ADA.API.DBManager
 
 
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> GetMultipleObjects<T1, T2, T3, T4, T5>(string sql, object parameters,
-                                        Func<Dapper.SqlMapper.GridReader, IEnumerable<T1>> func1,
-                                        Func<Dapper.SqlMapper.GridReader, IEnumerable<T2>> func2,
-                                        Func<Dapper.SqlMapper.GridReader, IEnumerable<T3>> func3,
-                                        Func<Dapper.SqlMapper.GridReader, IEnumerable<T4>> func4,
-                                        Func<Dapper.SqlMapper.GridReader, IEnumerable<T5>> func5)
+                                         Func<Dapper.SqlMapper.GridReader, IEnumerable<T1>> func1,
+                                         Func<Dapper.SqlMapper.GridReader, IEnumerable<T2>> func2,
+                                         Func<Dapper.SqlMapper.GridReader, IEnumerable<T3>> func3,
+                                         Func<Dapper.SqlMapper.GridReader, IEnumerable<T4>> func4,
+                                         Func<Dapper.SqlMapper.GridReader, IEnumerable<T5>> func5)
         {
             var objs = GetMultiple(sql, parameters, func1, func2, func3, func4, func5);
             return Tuple.Create(objs[0] as IEnumerable<T1>, objs[1] as IEnumerable<T2>, objs[2] as IEnumerable<T3>, objs[3] as IEnumerable<T4>, objs[4] as IEnumerable<T5>);
@@ -289,7 +289,7 @@ namespace ADA.API.DBManager
             }
             catch (Exception ex)
             {
-                throw  ex;
+                throw ex;
             }
             finally
             {

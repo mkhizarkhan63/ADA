@@ -6,7 +6,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EnvicreteWebApi.DBManager
+namespace ADA.API.DBManager
 {
     public interface IDapper:IDisposable
     {

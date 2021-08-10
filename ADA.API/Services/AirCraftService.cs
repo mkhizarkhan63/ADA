@@ -27,19 +27,21 @@ namespace ADA.API.Services
             return _airCraftRepository.Delete(id , ModifiedBy , ModifiedOn);
         }
 
-        public List<Aircraft> GetALL()
+        public List<Aircraft> GetAll()
         {
-            throw new NotImplementedException();
+            return _airCraftRepository.GetALL();
         }
+
+       
 
         public int GetById(int id)
         {
-            throw new NotImplementedException();
+            return _airCraftRepository.GetById(id);
         }
 
         public Aircraft Update(Aircraft obj)
         {
-            throw new NotImplementedException();
+            return _airCraftRepository.Update(obj);
         }
     }
 }

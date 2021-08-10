@@ -15,7 +15,7 @@ namespace ADAClassLibrary
     public class Aircraft
     {
         public int AircraftID { get; set; }
-        public int ACReg { get; set; }
+        public string ACReg { get; set; }
         public string ACType { get; set; }
         public int ACCapacity { get; set; }
         public int ACRows { get; set; }
