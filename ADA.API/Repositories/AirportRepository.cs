@@ -27,7 +27,7 @@ namespace ADA.API.Repositories
             parameters.Add(@"HomeBase", obj.HomeBase , DbType.Boolean , ParameterDirection.Input);
             parameters.Add(@"OilField", obj.OilField, DbType.Boolean, ParameterDirection.Input);
             parameters.Add(@"DestActive", obj.DestActive, DbType.Boolean, ParameterDirection.Input);
-            return _dapper.Insert<Airport>(@"" , parameters);
+            return _dapper.Insert<Airport>(@"[dbo].[usp_addDestination]", parameters);
         }
 
         public int Delete(int id, int ModifiedBy, DateTime ModifiedOn)
@@ -38,7 +38,7 @@ namespace ADA.API.Repositories
         public List<Airport> GetALL()
         {
             DynamicParameters parameters = new DynamicParameters();
-            return _dapper.GetAll<Airport>(@"" , parameters);
+            return _dapper.GetAll<Airport>(@"[dbo].[usp_getDestination]", parameters);
         }
 
         public int GetById(int id)
@@ -56,7 +56,7 @@ namespace ADA.API.Repositories
             parameters.Add(@"HomeBase", obj.HomeBase, DbType.Boolean, ParameterDirection.Input);
             parameters.Add(@"OilField", obj.OilField, DbType.Boolean, ParameterDirection.Input);
             parameters.Add(@"DestActive", obj.DestActive, DbType.Boolean, ParameterDirection.Input);
-            return _dapper.Update<Airport>(@"", parameters);
+            return _dapper.Update<Airport>(@"[dbo].[usp_updateDestination]", parameters);
         }
     }
 }
