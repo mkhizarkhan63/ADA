@@ -110,6 +110,17 @@ namespace ADAClassLibrary
 
     }
 
+    public class Airport
+    {
+        public int DestID { get; set; }
+        public string DestICAO { get; set; }
+        public string DestIATA { get; set; }
+        public string DestName { get; set; }
+        public bool HomeBase { get; set; }
+        public bool OilField { get; set; }
+        public bool DestActive { get; set; }
 
+
+    }
 
 }

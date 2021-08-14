@@ -16,5 +16,7 @@ namespace ADA.API.Utility
         IMemoryCache memoryCache { get; }
 
         IFlightService flightService { get; }
+
+        IAirportService airportService { get; }
     }
 }

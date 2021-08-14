@@ -20,7 +20,7 @@ namespace ADA.API.Utility
             services.AddTransient<IAirCraftRepository, AirCraftRepository>();
             services.AddTransient<IFlightRepository, FlightRepository>();
             services.AddTransient<IDapper, Dapperr>();
-         
+            services.AddTransient<IAirportRepository , AirportRepository>();
 
 
             ////services
