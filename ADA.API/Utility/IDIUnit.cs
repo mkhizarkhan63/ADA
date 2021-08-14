@@ -14,5 +14,7 @@ namespace ADA.API.Utility
         IAirCraftService airCraftService { get; }
 
         IMemoryCache memoryCache { get; }
+
+        IFlightService flightService { get; }
     }
 }

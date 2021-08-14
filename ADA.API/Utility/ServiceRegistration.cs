@@ -18,13 +18,14 @@ namespace ADA.API.Utility
 
             ///repository
             services.AddTransient<IAirCraftRepository, AirCraftRepository>();
+            services.AddTransient<IFlightRepository, FlightRepository>();
             services.AddTransient<IDapper, Dapperr>();
-
+         
 
 
             ////services
             services.AddTransient<IAirCraftService, AirCraftService>();
-
+            services.AddTransient<IFlightService, FlightService>();
             ///Dependency Ijection
             services.AddTransient<IDIUnit, DUnit>();
 

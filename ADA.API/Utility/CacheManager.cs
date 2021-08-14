@@ -1,4 +1,5 @@
 ﻿using ADA.API.IServices;
+using ADAClassLibrary;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -53,5 +54,9 @@ namespace ADA.API.Utility
             return value;
         }
 
+        public static implicit operator CacheManager<T>(CacheManager<Flight> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
