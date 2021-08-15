@@ -1,9 +1,6 @@
-using ADA.API.DBManager;
-using ADA.API.IRepositories;
-using ADA.API.IServices;
-using ADA.API.Repositories;
-using ADA.API.Services;
+using ADA.API.Helpers;
 using ADA.API.Utility;
+using Auth.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +25,7 @@ namespace ADA.API
         }
 
         public IConfiguration Configuration { get; }
+        public object BCryptNet { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -40,6 +38,7 @@ namespace ADA.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ADA.API", Version = "v1" });
             });
             services.AddServices();
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +58,11 @@ namespace ADA.API
             app.UseRouting();
 
             app.UseAuthorization();
+            // global error handler
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            // custom jwt auth middleware
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

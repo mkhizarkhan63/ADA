@@ -15,18 +15,14 @@ namespace ADA.API.Repositories
 
         private readonly IDapper _dapper;
 
-
-
         public AirCraftRepository(IDapper dapper)
         {
-
-
             _dapper = dapper;
         }
         public Aircraft Add(Aircraft obj)
         {
             DynamicParameters parameters = new DynamicParameters();
-          
+
             parameters.Add("@ACReg", obj.ACReg, DbType.String, ParameterDirection.Input);
             parameters.Add("@ACType", obj.ACType, DbType.String, ParameterDirection.Input);
             parameters.Add("@ACCapacity", obj.ACCapacity, DbType.Int32, ParameterDirection.Input);

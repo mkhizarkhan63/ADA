@@ -1,4 +1,5 @@
 ﻿
+using ADA.API.IRepositories;
 using ADA.API.IServices;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -14,5 +15,10 @@ namespace ADA.API.Utility
         IAirCraftService airCraftService { get; }
 
         IMemoryCache memoryCache { get; }
+
+        ITokenService tokenService { get; }
+
+        IPilotService pilotService { get; }
+        IStaffService staffService { get; }
     }
 }

@@ -10,13 +10,22 @@ namespace ADA.API.Utility
 {
     public class DUnit : IDIUnit
     {
-        public DUnit( IAirCraftService AirCraftRepository , IMemoryCache MemoryCache)
+        public DUnit( IAirCraftService AirCraftService , IMemoryCache MemoryCache , ITokenService TokenService , IPilotService PilotService , IStaffService StaffService)
         {
-            airCraftService = AirCraftRepository;
+            airCraftService = AirCraftService;
             memoryCache = MemoryCache;
+            tokenService = TokenService;
+            pilotService = PilotService;
+            staffService = StaffService;
         }
         public IAirCraftService airCraftService { get; }
 
         public IMemoryCache memoryCache { get; }
+
+        public ITokenService tokenService { get;}
+        public IPilotService pilotService { get; }
+        public IStaffService staffService { get; }
+
+
     }
 }

@@ -15,7 +15,7 @@ namespace ADA.API.DBManager
     public class Dapperr : IDapper
     {
 
-        private string Connectionstring = "DefaultConnection";
+        private string Connectionstring;
         //private readonly IConfiguration _configuration;
 
         public Dapperr(IConfiguration configuration)
@@ -31,7 +31,36 @@ namespace ADA.API.DBManager
 
         public int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
-            throw new NotImplementedException();
+            int result;
+            IDbConnection db = new SqlConnection(Connectionstring);
+            try
+            {
+                if (db.State == ConnectionState.Closed)
+                    db.Open();
+
+                var tran = db.BeginTransaction();
+                try
+                {
+                    result = db.Execute(sp, parms, commandType: commandType, transaction: tran);
+                    tran.Commit();
+                }
+                catch (DbException ex)
+                {
+                    tran.Rollback();
+                    throw ex;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (db.State == ConnectionState.Open)
+                    db.Close();
+            }
+
+            return result;
         }
 
         public T Get<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)

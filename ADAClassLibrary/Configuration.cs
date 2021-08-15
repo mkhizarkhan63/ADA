@@ -58,7 +58,30 @@ namespace ADAClassLibrary
         public string FwdCargoWT { get; set; }
         public string AftCargoWT { get; set; }
 
+    }
 
+    public class Pilot {
+
+        public int PilotID { get; set; }
+        public string PilotEmpNum { get; set; }
+        public string PilotSurname { get; set; }
+        public string PilotName { get; set; }
+        public string ACType { get; set; }
+        public bool PilotActive { get; set; }
+
+    }
+
+    public class Staff
+    {
+        
+        public int StaffID { get; set; }
+        public string EmpNum { get; set; }
+        public string StaffSurname { get; set; }
+        public string StaffName { get; set; }
+        public string StaffPwd { get; set; }
+        public bool StaffRights { get; set; }
+        public bool StaffActive { get; set; }
+        public string StaffGrp { get; set; }
     }
 
 }
