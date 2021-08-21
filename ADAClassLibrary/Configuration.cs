@@ -134,4 +134,55 @@ namespace ADAClassLibrary
 
     }
 
+    public class Flight
+    {
+        public int FltID { get; set; }
+        public DateTime FltDateTime { get; set; }
+        public string FltNumber { get; set; }
+        public int DestID { get; set; }
+        public int DestID2 { get; set; }
+        public string FltColor { get; set; }
+        public string FltStatus { get; set; }
+        public string FltRoute { get; set; }
+        public int PilotID1 { get; set; }
+        public int PilotID2 { get; set; }
+        public int PilotID3 { get; set; }
+        public int FAID1 { get; set; }
+        public int FAID2 { get; set; }
+        public int FAID3 { get; set; }
+        public int FAID4 { get; set; }
+        public int CustID { get; set; }
+        public int RsrvdSeats { get; set; }
+        public int SeatMap { get; set; }
+        public int Payload { get; set; }
+        public int Fuel { get; set; }
+        public int Temperature { get; set; }
+        public int FwdCargo1 { get; set; }
+        public int FwdCargo2 { get; set; }
+        public int FwdCargo3 { get; set; }
+        public int FwdCargo4 { get; set; }
+        public int AftCargo1 { get; set; }
+        public int AftCargo2 { get; set; }
+        public int AftCargo3 { get; set; }
+        public int AftCargo4 { get; set; }
+        public int AftCargo5 { get; set; }
+        public int AftCargo6 { get; set; }
+        public string GateNum { get; set; }
+        public DateTime FltTimeStamp { get; set; }
+        public int AgentID { get; set; }
+        public int ClosingAgentID { get; set; }
+        public DateTime ClosingTimeStamp { get; set; }
+        public int ActualDepTime { get; set; }
+        public string FltRemarks { get; set; }
+        public int SplitGender { get; set; }
+        public string SubManifestColor { get; set; }
+        public int ShowRCS { get; set; }
+        public DateTime FltTSEdit { get; set; }
+        public int FltTSEditAgentID { get; set; }
+        public int AircraftID { get; set; }
+
+    }
+
+
+
 }

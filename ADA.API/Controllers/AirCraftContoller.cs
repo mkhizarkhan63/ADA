@@ -47,7 +47,7 @@ namespace ADA.API.Controllers
         }
 
 
-        [HttpPost("Add")]
+        [HttpPost("AddAircraft")]
         public Response Add(Aircraft obj)
         {
 
