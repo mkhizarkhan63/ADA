@@ -51,10 +51,20 @@ namespace ADA.API.Controllers
             Response response = new Response();
             try
             {
+              
                 var cacheData = cacheManager.TryGetValue(cacheName).ToList();
-              var res = _Service.tokenService.Authenticate(model, ipAddress());
-
                 response = CustomStatusResponse.GetResponse(200);
+                if (cacheData.Any(x => x.Username.ToLower().Equals(model.Username.ToLower())))
+                {
+                   
+                    response.ResponseMsg = "Username Alerady Exist!";
+                    response.Data = null;
+
+                    return response;
+
+                }
+                var res = _Service.tokenService.Authenticate(model, ipAddress());
+
 
                 if (res != null)
                 {
@@ -117,6 +127,7 @@ namespace ADA.API.Controllers
             {
 
                 var cacheData = cacheManager.TryGetValue(cacheName).ToList();
+
                 var res = _Service.tokenService.Login(model, ipAddress());
                 setTokenCookie(res.RefreshToken);
 
@@ -142,7 +153,8 @@ namespace ADA.API.Controllers
 
                     #endregion
 
-                    response.Data = res;
+                    response.Data = res.Username ;
+                    response.Token = res.JwtToken;
                     response.ResponseMsg = "Data save successfully!";
                 }
                 return response;

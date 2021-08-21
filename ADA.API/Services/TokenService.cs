@@ -137,8 +137,8 @@ namespace ADA.API.Services
                 throw new AppException("Invalid token");
 
             // revoke token and save
-            revokeRefreshToken(userToken, ipAddress, "Revoked without replacement");
-            _context.UpdateRefreshToken(userToken);
+            var tokentoUpdate =  revokeRefreshToken(userToken, ipAddress, "Revoked without replacement");
+            _context.UpdateRefreshToken(tokentoUpdate);
 
         }
         public User GetUserByName(string username)
@@ -160,7 +160,10 @@ namespace ADA.API.Services
         private RefreshToken rotateRefreshToken(RefreshToken refreshToken, string ipAddress)
         {
             var newRefreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
-            revokeRefreshToken(refreshToken, ipAddress, "Replaced by new token", newRefreshToken.Token);
+            newRefreshToken.userID = refreshToken.userID;
+            var token = revokeRefreshToken(refreshToken, ipAddress, "Replaced by new token", newRefreshToken.Token);
+            _context.UpdateRefreshToken(token);
+            
             return newRefreshToken;
         }
         private void removeOldRefreshTokens(int id)
@@ -178,21 +181,25 @@ namespace ADA.API.Services
             if (!string.IsNullOrEmpty(user.ReplacedByToken))
             {
                 var childToken = _context.getUserByRefreshToken(user.Token);
+                RefreshToken token = new RefreshToken();
 
                 if (childToken.IsActive)
-                    revokeRefreshToken(childToken, ipAddress, reason);
+                { token =  revokeRefreshToken(childToken, ipAddress, reason);
+                    _context.UpdateRefreshToken(token);
+                }
                 else
-                    revokeDescendantRefreshTokens(childToken, ipAddress, reason);
+                    revokeDescendantRefreshTokens(token, ipAddress, reason);
 
             }
         }
 
-        private void revokeRefreshToken(RefreshToken token, string ipAddress, string reason = null, string replacedByToken = null)
+        private RefreshToken revokeRefreshToken(RefreshToken token, string ipAddress, string reason = null, string replacedByToken = null)
         {
             token.Revoked = DateTime.UtcNow;
             token.RevokedByIp = ipAddress;
             token.ReasonRevoked = reason;
             token.ReplacedByToken = replacedByToken;
+            return token;
         }
 
         public List<User> GetAll()

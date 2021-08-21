@@ -20,5 +20,6 @@ namespace ADA.API.Utility
 
         IPilotService pilotService { get; }
         IStaffService staffService { get; }
+        IFlightService flightService { get; }
     }
 }

@@ -25,7 +25,7 @@ namespace ADA.API.Utility
             services.AddTransient<ITokenRepositery, TokenRepositery>();
             services.AddTransient<IPilotRepositery, PilotRepositery>();
             services.AddTransient<IStaffRepositery, StaffRepositery>();
-
+            services.AddTransient<IFlightRepositery, FlightRepositery>();
 
 
             ////services
@@ -33,6 +33,7 @@ namespace ADA.API.Utility
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IPilotService, PilotService>();
             services.AddTransient<IStaffService, StaffService>();
+            services.AddTransient<IFlightService, FlightService>();
 
             ///Dependency Ijection
             services.AddTransient<IDIUnit, DUnit>();

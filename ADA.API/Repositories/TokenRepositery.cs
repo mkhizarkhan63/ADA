@@ -101,9 +101,13 @@ namespace ADA.API.Repositories
         {
             var param = new DynamicParameters();
             param.Add("id", token.Id, DbType.Int32, ParameterDirection.Input);
+            param.Add("revoked", token.Revoked, DbType.DateTime, ParameterDirection.Input );
             param.Add("revokedbyip", token.RevokedByIp, DbType.String ,ParameterDirection.Input);
             param.Add("isrevoked", token.IsRevoked, DbType.Boolean, ParameterDirection.Input);
             param.Add("replacedbytoken", token.ReplacedByToken, DbType.String,  ParameterDirection.Input);
+            param.Add("reasonrevoked", token.ReasonRevoked, DbType.String,  ParameterDirection.Input);
+            param.Add("isactive", token.IsActive, DbType.Boolean,  ParameterDirection.Input);
+            param.Add("isexpired", token.IsExpired, DbType.Boolean,  ParameterDirection.Input);
 
             return _dapper.Execute(@"[dbo].[usp_UpdateRefreshToken]", param);
         }

@@ -84,4 +84,54 @@ namespace ADAClassLibrary
         public string StaffGrp { get; set; }
     }
 
+    public class Flight
+    {
+        public int FltID { get; set; }
+        public DateTime FltDateTime { get; set; }
+        public string FltNumber { get; set; }
+        public int DestID { get; set; }
+        public int DestID2 { get; set; }
+        public int FltColorID_Fk { get; set; }
+        public int FltStatus_Fk { get; set; }
+        public string FltRoute { get; set; }
+        public int PilotID1_Fk { get; set; }
+        public int PilotID2_Fk { get; set; }
+        public int PilotID3_Fk { get; set; }
+        public int FAID1_FK { get; set; }
+        public int FAID2_FK { get; set; }
+        public int FAID3_FK { get; set; }
+        public int FAID4_FK { get; set; }
+        public int CustID_Fk { get; set; }
+        public int RsrvdSeats { get; set; }
+        public bool SeatMap { get; set; }
+        public int Payload { get; set; }
+        public int Fuel { get; set; }
+        public int Temperature { get; set; }
+        public int FwdCargo1 { get; set; }
+        public int FwdCargo2 { get; set; }
+        public int FwdCargo3 { get; set; }
+        public int FwdCargo4 { get; set; }
+        public int AftCargo1 { get; set; }
+        public int AftCargo2 { get; set; }
+        public int AftCargo3 { get; set; }
+        public int AftCargo4 { get; set; }
+        public int AftCargo5 { get; set; }
+        public int AftCargo6 { get; set; }
+        public string GateNum { get; set; }
+        public DateTime FltTimeStamp { get; set; }
+        public int AgentID_Fk { get; set; }
+        public int ClosingAgentID_Fk { get; set; }
+        public DateTime ClosingTimeStamp { get; set; }
+        public int ActualDepTime { get; set; }
+        public string FltRemarks { get; set; }
+        public bool SplitGender { get; set; }
+        public int SubManifestID_Fk { get; set; }
+        public bool ShowRCS { get; set; }
+        public DateTime FltTSEdit { get; set; }
+        public int FltTSEditAgentID_Fk { get; set; }
+        public int AircraftID_Fk { get; set; }
+
+
+    }
+
 }
