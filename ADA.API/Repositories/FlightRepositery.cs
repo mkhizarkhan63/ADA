@@ -26,7 +26,7 @@ namespace ADA.API.Repositories
             parameters.Add("@FltNumber", flight.FltNumber , DbType.String, ParameterDirection.Input);
             parameters.Add("@DestID", flight.DestID , DbType.Int32, ParameterDirection.Input);
             parameters.Add("@DestID2", flight.DestID2 , DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@FltColorID_Fk", flight.FltColorID_Fk , DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@FltColor", flight.FltColor , DbType.Int32, ParameterDirection.Input);
             parameters.Add("@FltStatus_Fk", flight.FltStatus_Fk, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@FltRoute", flight.FltRoute, DbType.String, ParameterDirection.Input);
             parameters.Add("@PilotID1_Fk", flight.PilotID1_Fk, DbType.Int32, ParameterDirection.Input);
@@ -60,7 +60,7 @@ namespace ADA.API.Repositories
             parameters.Add("@ActualDepTime", flight.ActualDepTime, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@FltRemarks", flight.FltRemarks, DbType.String, ParameterDirection.Input);
             parameters.Add("@SplitGender", flight.SplitGender, DbType.Boolean, ParameterDirection.Input);
-            parameters.Add("@SubManifestID_Fk", flight.SubManifestID_Fk, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifest", flight.SubManifest, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ShowRCS", flight.ShowRCS, DbType.Boolean, ParameterDirection.Input);
             parameters.Add("@FltTSEdit", flight.FltTSEdit, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@FltTSEditAgentID_Fk", flight.FltTSEditAgentID_Fk, DbType.Int32, ParameterDirection.Input);
