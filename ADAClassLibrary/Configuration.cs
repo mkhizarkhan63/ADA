@@ -73,7 +73,7 @@ namespace ADAClassLibrary
 
     public class Staff
     {
-        
+
         public int StaffID { get; set; }
         public string EmpNum { get; set; }
         public string StaffSurname { get; set; }
@@ -87,7 +87,7 @@ namespace ADAClassLibrary
     public class Flight
     {
         public int FltID { get; set; }
-        public DateTime FltDateTime { get; set; }
+        public DateTime? FltDateTime { get; set; }
         public string FltNumber { get; set; }
         public int DestID { get; set; }
         public int DestID2 { get; set; }
@@ -121,13 +121,13 @@ namespace ADAClassLibrary
         public DateTime FltTimeStamp { get; set; }
         public int AgentID_Fk { get; set; }
         public int ClosingAgentID_Fk { get; set; }
-        public DateTime ClosingTimeStamp { get; set; }
+        public DateTime? ClosingTimeStamp { get; set; }
         public int ActualDepTime { get; set; }
         public string FltRemarks { get; set; }
         public bool SplitGender { get; set; }
         public string SubManifest { get; set; }
         public bool ShowRCS { get; set; }
-        public DateTime FltTSEdit { get; set; }
+        public DateTime? FltTSEdit { get; set; }
         public int FltTSEditAgentID_Fk { get; set; }
         public int AircraftID_Fk { get; set; }
 
@@ -148,7 +148,36 @@ namespace ADAClassLibrary
         public string FIDSName { get; set; }
         public int FltDest { get; set; }
     }
+    public class Customer {
 
- 
+        public int CustID { get; set; }
+        public int CustCode { get; set; }
+        public string CustName { get; set; }
+        public bool UsePaxList { get; set; }
+
+
+    }
+    public class FlightStatus {
+
+        public int fltStatusID { get; set; }
+        public string fltStatus { get; set; }
+
+
+    }
+
+
+
+
+    public class DropdownList{
+
+
+        public List<Customer> customer { get; set; }
+        public List<Destination> destination { get; set; }
+        public List<Pilot> pilot { get; set; }
+        public List<Staff> staff { get; set; }
+        public List<Aircraft> arcraft { get; set; }
+        public List<FlightStatus> flightStatus { get; set; }
+
+    }
 
 }

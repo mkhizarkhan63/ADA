@@ -13,5 +13,8 @@ namespace ADA.API.IRepositories
         Flight Update(Flight flight);
 
         List<Flight> GetAll();
+        Flight GetByID(int id);
+
+        object GetFlightsDropDown();
     }
 }

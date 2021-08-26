@@ -18,6 +18,7 @@ namespace ADA.API.Services
         }
         public Flight AddFlight(Flight flight)
         {
+            flight.FltTimeStamp = DateTime.Now;
             return _flightRepository.Add(flight);
         }
 
@@ -26,8 +27,24 @@ namespace ADA.API.Services
             return _flightRepository.GetAll();
         }
 
+        public object GetDropdownValues()
+        {
+            return _flightRepository.GetFlightsDropDown();
+        }
+
+        public Flight GetFlightBtID(int id)
+        {
+            return _flightRepository.GetByID(id);
+        }
+
         public Flight UpdateFlight(Flight flight)
         {
+            flight.FltTSEdit = DateTime.Now;
+
+            if(flight.FltStatus_Fk == 3)
+            {
+                flight.ClosingTimeStamp = DateTime.Now;
+            }
             return _flightRepository.Update(flight);
         }
     }

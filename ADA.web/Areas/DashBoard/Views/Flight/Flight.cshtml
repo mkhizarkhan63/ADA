@@ -21,8 +21,8 @@
                             </b>
                         </h3>
                         <div class=" d-flex justify-content-end">
-
-                            <button type="button" class="btn btn-sm btn-success mt-1">Save</button>
+                            <button id="Save" type="button" class="btn btn-sm btn-success mt-1">Save</button>
+                            <button id="Edit" type="button" class="btn btn-sm btn-success mt-1">Edit</button>
                         </div>
                     </div><!-- /.card-header -->
                     <div class="card-body">
@@ -32,17 +32,17 @@
                                 <form>
                                     <div class="form-group form-inline">
                                         <label style="margin-right:53px;">ETD:</label>
-                                        <input type="date" class="form-control  form-control-sm " style=" width: 256px;">
+                                        <input id="ETD" type="date" class="form-control  form-control-sm " style=" width: 256px;">
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:36px;">Flight #:</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 80px;">
+                                            <input id="FlightNumber" type="text" class="form-control form-control-sm" style="width: 80px;">
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
-                                                <input type="checkbox" class="form-check-input ml-2">
+                                                <input id="SeatMap" type="checkbox" class="form-check-input ml-2">
                                                 <label class="mr-2">Enable SeatMap</label>
 
                                             </div>
@@ -53,13 +53,13 @@
 
                                         <div class="form-group form-inline">
                                             <label style="margin-right:27px;">Dest 1&2:</label>
-                                            <select class="form-control form-control-sm" style="width: 80px;">
+                                            <select id="Dest1" class="form-control form-control-sm" style="width: 80px;">
                                                 <option>Des1</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
+                                            <select id="Dest2" class="form-control form-control-sm" style="width: 80px;">
                                                 <option>Des2</option>
                                             </select>
                                         </div>
@@ -69,13 +69,12 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:33px;">Aircraft :</label>
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>Des1</option>
+                                            <select id="AircraftType" class="form-control form-control-sm" style="width: 80px;">
                                             </select>
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
-                                                <input type="checkbox" class="form-check-input ml-2">
+                                                <input id="RCS" type="checkbox" class="form-check-input ml-2">
                                                 <label class="mr-2">Show RCS</label>
                                             </div>
                                         </div>
@@ -84,13 +83,35 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:26px;">Flt Color :</label>
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>Black</option>
+                                            <select id="FlightColor1" class="form-control form-control-sm" style="width: 80px;">
+                                                <option value="-" selected>Color 1</option>
+                                                <option value="BLK">Black</option>
+                                                <option value="BLU">Blue</option>
+                                                <option value="BRW">Brown</option>
+                                                <option value="GRY">Gray</option>
+                                                <option value="GRN">Green</option>
+                                                <option value="ORG">Orange</option>
+                                                <option value="PNK">Pink</option>
+                                                <option value="RED">Red</option>
+                                                <option value="WHT">White</option>
+                                                <option value="VLT">Violet</option>
+                                                <option value="YLW">Yellow</option>
                                             </select>
                                         </div>
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>Black</option>
+                                            <select id="FlightColor2" class="form-control form-control-sm" style="width: 80px;">
+                                                <option value="-" selected>Color 2</option>
+                                                <option value="BLK">Black</option>
+                                                <option value="BLU">Blue</option>
+                                                <option value="BRW">Brown</option>
+                                                <option value="GRY">Gray</option>
+                                                <option value="GRN">Green</option>
+                                                <option value="ORG">Orange</option>
+                                                <option value="PNK">Pink</option>
+                                                <option value="RED">Red</option>
+                                                <option value="WHT">White</option>
+                                                <option value="VLT">Violet</option>
+                                                <option value="YLW">Yellow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -98,25 +119,58 @@
                                     <div class="row pb-0 mb-0">
                                         <label style="margin-right:43px;">Route :</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-sm" style=" width: 256px;height: 60px;" />
+                                            <input id="Route" type="text" class="form-control form-control-sm" style=" width: 256px;height: 60px;" />
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:37px;">Minifest<br /> Colors :</label>
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>Black</option>
+                                            <select id="ManifestColor1" class="form-control form-control-sm" style="width: 80px;">
+                                                <option value="-1" selected>ManifestColor 1</option>
+                                                <option value="BLK">Black</option>
+                                                <option value="BLU">Blue</option>
+                                                <option value="BRW">Brown</option>
+                                                <option value="GRY">Gray</option>
+                                                <option value="GRN">Green</option>
+                                                <option value="ORG">Orange</option>
+                                                <option value="PNK">Pink</option>
+                                                <option value="RED">Red</option>
+                                                <option value="WHT">White</option>
+                                                <option value="VLT">Violet</option>
+                                                <option value="YLW">Yellow</option>
                                             </select>
                                         </div>
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>Black</option>
+                                            <select id="ManifestColor2" class="form-control form-control-sm" style="width: 80px;">
+                                                <option value="-1" selected>ManifestColor 2</option>
+                                                <option value="BLK">Black</option>
+                                                <option value="BLU">Blue</option>
+                                                <option value="BRW">Brown</option>
+                                                <option value="GRY">Gray</option>
+                                                <option value="GRN">Green</option>
+                                                <option value="ORG">Orange</option>
+                                                <option value="PNK">Pink</option>
+                                                <option value="RED">Red</option>
+                                                <option value="WHT">White</option>
+                                                <option value="VLT">Violet</option>
+                                                <option value="YLW">Yellow</option>
                                             </select>
                                         </div>
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>Black</option>
+                                            <select id="ManifestColor3" class="form-control form-control-sm" style="width: 80px;">
+                                                <option value="-1" selected>ManifestColor 3</option>
+                                                <option value="BLK">Black</option>
+                                                <option value="BLU">Blue</option>
+                                                <option value="BRW">Brown</option>
+                                                <option value="GRY">Gray</option>
+                                                <option value="GRN">Green</option>
+                                                <option value="ORG">Orange</option>
+                                                <option value="PNK">Pink</option>
+                                                <option value="RED">Red</option>
+                                                <option value="WHT">White</option>
+                                                <option value="VLT">Violet</option>
+                                                <option value="YLW">Yellow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -124,37 +178,64 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label class="mr-2">Usefule WT :</label>
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>0</option>
-                                            </select>
+                                            <input id="UsefulWeight1" type="number" class="form-control  form-control-sm " style=" width: 80px;">
                                         </div>
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>0</option>
-                                            </select>
+                                            <input id="UsefulWeight2" type="number" class="form-control  form-control-sm " style=" width: 80px;">
                                         </div>
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>0</option>
-                                            </select>
+                                            <input id="UsefulWeight3" type="number" class="form-control  form-control-sm " style=" width: 80px;">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <div class="form-inline" style="margin-left: 93px;">
-                                                <select class="form-control form-control-sm" style="width: 80px;">
-                                                    <option>Blue</option>
+                                                <select id="UsefulWeightColor1" class="form-control form-control-sm" style="width: 80px;">
+                                                    <option value="-1" selected>ManifestColor 4</option>
+                                                    <option value="BLK">Black</option>
+                                                    <option value="BLU">Blue</option>
+                                                    <option value="BRW">Brown</option>
+                                                    <option value="GRY">Gray</option>
+                                                    <option value="GRN">Green</option>
+                                                    <option value="ORG">Orange</option>
+                                                    <option value="PNK">Pink</option>
+                                                    <option value="RED">Red</option>
+                                                    <option value="WHT">White</option>
+                                                    <option value="VLT">Violet</option>
+                                                    <option value="YLW">Yellow</option>
                                                 </select>
 
                                                 <div class="form-group form-inline ml-2">
-                                                    <select class="form-control form-control-sm" style="width: 80px;">
-                                                        <option>Blue</option>
+                                                    <select id="UsefulWeightColor2" class="form-control form-control-sm" style="width: 80px;">
+                                                        <option value="-1" selected>ManifestColor 5</option>
+                                                        <option value="BLK">Black</option>
+                                                        <option value="BLU">Blue</option>
+                                                        <option value="BRW">Brown</option>
+                                                        <option value="GRY">Gray</option>
+                                                        <option value="GRN">Green</option>
+                                                        <option value="ORG">Orange</option>
+                                                        <option value="PNK">Pink</option>
+                                                        <option value="RED">Red</option>
+                                                        <option value="WHT">White</option>
+                                                        <option value="VLT">Violet</option>
+                                                        <option value="YLW">Yellow</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group form-inline ml-2">
-                                                    <select class="form-control form-control-sm" style="width: 80px;">
-                                                        <option>Blue</option>
+                                                    <select id="UsefulWeightColor3" class="form-control form-control-sm" style="width: 80px;">
+                                                        <option value="-1" selected>ManifestColor 6</option>
+                                                        <option value="BLK">Black</option>
+                                                        <option value="BLU">Blue</option>
+                                                        <option value="BRW">Brown</option>
+                                                        <option value="GRY">Gray</option>
+                                                        <option value="GRN">Green</option>
+                                                        <option value="ORG">Orange</option>
+                                                        <option value="PNK">Pink</option>
+                                                        <option value="RED">Red</option>
+                                                        <option value="WHT">White</option>
+                                                        <option value="VLT">Violet</option>
+                                                        <option value="YLW">Yellow</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -164,26 +245,20 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label class="mr-2">Usefule WT :</label>
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>0</option>
-                                            </select>
+                                            <input id="UsefulWeightBeta1" type="number" class="form-control  form-control-sm " style=" width: 80px;">
                                         </div>
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>0</option>
-                                            </select>
+                                            <input id="UsefulWeightBeta2" type="number" class="form-control  form-control-sm " style=" width: 80px;">
                                         </div>
                                         <div class="form-group form-inline ml-2">
-                                            <select class="form-control form-control-sm" style="width: 80px;">
-                                                <option>0</option>
-                                            </select>
+                                            <input id="UsefulWeightBeta3" type="number" class="form-control  form-control-sm " style=" width: 80px;">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:43px;">Pilot1 :</label>
-                                            <select class="form-control form-control-sm" style="width: 258px;">
+                                            <select id="Pilot1" class="form-control form-control-sm" style="width: 258px;">
                                                 <option>----</option>
                                             </select>
                                         </div>
@@ -192,7 +267,7 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:43px;">Pilot2 :</label>
-                                            <select class="form-control form-control-sm" style="width: 258px;">
+                                            <select id="Pilot2" class="form-control form-control-sm" style="width: 258px;">
                                                 <option>----</option>
                                             </select>
                                         </div>
@@ -202,7 +277,7 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:20px;">Observer :</label>
-                                            <select class="form-control form-control-sm" style="width: 258px;">
+                                            <select id="Observer" class="form-control form-control-sm" style="width: 258px;">
                                                 <option>----</option>
                                             </select>
                                         </div>
@@ -211,7 +286,7 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:59px;">FA1 :</label>
-                                            <select class="form-control form-control-sm" style="width: 258px;">
+                                            <select id="FA1" class="form-control form-control-sm" style="width: 258px;">
                                                 <option>----</option>
                                             </select>
                                         </div>
@@ -221,7 +296,7 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:59px;">FA2 :</label>
-                                            <select class="form-control form-control-sm" style="width: 258px;">
+                                            <select id="FA2" class="form-control form-control-sm" style="width: 258px;">
                                                 <option>----</option>
                                             </select>
                                         </div>
@@ -230,7 +305,7 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:16px;">Customer :</label>
-                                            <select class="form-control form-control-sm" style="width: 70px;">
+                                            <select id="Customer" class="form-control form-control-sm" style="width: 70px;">
                                                 <option>----</option>
                                             </select>
                                         </div>
@@ -238,7 +313,7 @@
                                             <div class="form-check-inline">
 
                                                 <label class="ml-4">&nbsp;&nbsp;Use PaxList</label>
-                                                <input type="checkbox" class="form-check-input ml-3">
+                                                <input id="PaxList" type="checkbox" class="form-check-input ml-3">
                                             </div>
                                         </div>
                                     </div>
@@ -246,14 +321,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:54px;">Fuel :</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="Fuel" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class="ml-3">&nbsp;&nbsp;Split Gender</label>
-                                                <input type="checkbox" class="form-check-input ml-3">
+                                                <input id="SplitGender" type="checkbox" class="form-check-input ml-3">
                                             </div>
                                         </div>
                                     </div>
@@ -262,14 +337,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:11px;">Max Cargo :</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="MaxCargo" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-2 mr-2">Temperature :</label>
-                                                <input type="text" class="form-control form-control-sm" style="width: 40px; height: 25px;">
+                                                <input id="Temperature" type="number" class="form-control form-control-sm" style="width: 40px; height: 25px;">
 
                                             </div>
                                         </div>
@@ -279,14 +354,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:45px;">Rsrvd Seats :</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="RsrvdSeats" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-2 mr-3">Gate# :</label>
-                                                <input type="text" class="form-control form-control-sm" style="width: 40px; height: 25px;">
+                                                <input id="GateNumber" type="number" class="form-control form-control-sm" style="width: 40px; height: 25px;">
 
                                             </div>
                                         </div>
@@ -295,19 +370,19 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:68px;">Frt + Bag:</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 45px;">
+                                            <input id="Frt" type="number" class="form-control form-control-sm" style="width: 45px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <label class="ml-2 mr-2">+</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 45px;">
+                                            <input id="Bag" type="number" class="form-control form-control-sm" style="width: 45px;">
 
                                         </div>
 
                                         <div class="form-group form-inline">
 
                                             <label class="ml-2 mr-2">=</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 45px;">
+                                            <input id="FrtBagTotal" type="number" class="form-control form-control-sm" style="width: 45px;">
 
                                         </div>
                                     </div>
@@ -315,14 +390,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:43px;">FWD Cargo 1:</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="FWDcargo1" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-3 mr-3">2:</label>
-                                                <input type="text" class="form-control form-control-sm" style="width:70px;">
+                                                <input id="FWDcargo2" type="number" class="form-control form-control-sm" style="width:70px;">
 
                                             </div>
                                         </div>
@@ -331,14 +406,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:43px;">FWD Cargo 3:</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="FWDcargo3" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-3 mr-3">4:</label>
-                                                <input type="text" class="form-control form-control-sm" style="width:70px;">
+                                                <input id="FWDcargo4" type="number" class="form-control form-control-sm" style="width:70px;">
 
                                             </div>
                                         </div>
@@ -346,14 +421,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:48px;">AFT Cargo 1:</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="AFTcargo1" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-3 mr-3">2:</label>
-                                                <input type="text" class="form-control form-control-sm" style="width:70px;">
+                                                <input id="AFTcargo2" type="number" class="form-control form-control-sm" style="width:70px;">
 
                                             </div>
                                         </div>
@@ -362,14 +437,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:48px;">AFT Cargo 3:</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="AFTcargo3" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-3 mr-3">4:</label>
-                                                <input type="text" class="form-control form-control-sm" style="width:70px;">
+                                                <input id="AFTcargo4" type="number" class="form-control form-control-sm" style="width:70px;">
 
                                             </div>
                                         </div>
@@ -378,14 +453,14 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:48px;">AFT Cargo 5:</label>
-                                            <input type="text" class="form-control form-control-sm" style="width: 70px;">
+                                            <input id="AFTcargo5" type="number" class="form-control form-control-sm" style="width: 70px;">
 
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-3 mr-3">6:</label>
-                                                <input type="text" class="form-control form-control-sm" style="width:70px;">
+                                                <input id="AFTcargo6" type="number" class="form-control form-control-sm" style="width:70px;">
 
                                             </div>
                                         </div>
@@ -394,7 +469,7 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:63px;">Flt Status:</label>
-                                            <select class="form-control form-control-sm" style="width: 186px;">
+                                            <select id="FlightStatus" class="form-control form-control-sm" style="width: 186px;">
                                                 <option>----</option>
                                             </select>
 
@@ -404,7 +479,7 @@
                                     <div class="row">
                                         <div class="form-group form-inline">
                                             <label style="margin-right:35px;">Agent:</label>
-                                            <select class="form-control form-control-sm" style="width: 106px;">
+                                            <select id="Agent" class="form-control form-control-sm" style="width: 106px;">
                                                 <option>----</option>
                                             </select>
                                         </div>
@@ -412,7 +487,7 @@
                                             <div class="form-check-inline">
 
                                                 <label class=" ml-3 mr-3">ATD:</label>
-                                                <input type="text" class="form-control form-control-sm" style="width:70px;">
+                                                <input id="ATD" type="number" class="form-control form-control-sm" style="width:70px;">
 
                                             </div>
                                         </div>
@@ -421,7 +496,7 @@
                                     <div class="row">
                                         <label style="margin-right:11px;">Remarks :</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-sm" style=" width: 241px;height: 60px;" />
+                                            <input id="Remarks" type="text" class="form-control form-control-sm" style=" width: 241px;height: 60px;" />
                                         </div>
                                     </div>
 
@@ -430,108 +505,59 @@
                             </div>
 
                             <div class="col-md-7">
-                                <table id="example2" class="table table-responsive  table-bordered" style=" max-height: 600px;">
+                                <table id="FlightsTable" class="table table-responsive  table-bordered" style=" max-height: 600px;">
                                     <thead>
-                                        <tr><th>Rendering engine</th><th>Browser</th><th>Platform(s)</th><th>Engine version</th><th>CSS grade</th><th>Actions</th></tr>
+                                        <tr><th>FltID</th><th>FltDateTime</th><th>FltNumber</th><th>DestID</th><th>DestID2</th><th>FltColorID_Fk</th><th>FltStatus_Fk</th><th>FltRoute</th><th>PilotID1_Fk</th><th>PilotID2_Fk</th><th>PilotID3_Fk</th><th>FAID1_Fk</th><th>FAID2_Fk</th><th>FAID3_Fk</th><th>FAID4_Fk</th><th>CustID_Fk</th><th>RsrvdSeats</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
                                     </thead>
                                     <tbody>
 
                                         <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other browsers</td>
-                                            <td>All others</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>U</td>
-                                            <td><div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit" title="Edit" data-id="7"><i class="fa fa-pencil"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="7"><i class="fa fa-trash"></i></a></div></div></td>
-                                        </tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>   
 
                                     </tbody>
 
@@ -548,6 +574,91 @@
         <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->
 </section>
+
+
+
+<script type="text/x-handlebars" id="temp_DropDownaircraft">
+    <option value="-1" selected disabled>Aircraft</option>
+    {{#each this}}
+    <option value="{{aircraftID}}">{{acReg}}</option>
+    {{/each}}
+
+</script>
+<script type="text/x-handlebars" id="temp_DropDowndest1">
+    <option value="-1" selected disabled>Dest 1</option>
+    {{#each this}}
+    <option value="{{destID}}"> {{destICAO}} | {{destIATA}} | {{destName}}
+    </option>
+    {{/each}}
+
+</script>
+<script type="text/x-handlebars" id="temp_DropDowndest2">
+    <option value="-1" selected disabled>Dest 2</option>
+    {{#each this}}
+    <option value="{{destID}}">{{destICAO}} | {{destIATA}} | {{destName}}</option>
+    {{/each}}
+
+</script>
+<script type="text/x-handlebars" id="temp_DropDownpilot1">
+    <option value="-1" selected disabled>Pilot 1</option>
+
+    {{#each this}}
+    <option value="{{pilotID}}">{{pilotName}} | {{pilotSurname}}</option>
+    {{/each}}
+</script>
+<script type="text/x-handlebars" id="temp_DropDownpilot2">
+    <option value="-1" selected disabled>Pilot 2</option>
+
+    {{#each this}}
+    <option value="{{pilotID}}">{{pilotName}} | {{pilotSurname}}</option>
+    {{/each}}
+</script>
+<script type="text/x-handlebars" id="temp_DropDownobserver">
+    <option value="-1" selected disabled> Observer </option>
+
+    {{#each this}}
+    <option value="{{pilotID}}">{{pilotName}} | {{pilotSurname}}</option>
+    {{/each}}
+</script>
+<script type="text/x-handlebars" id="temp_DropDownFA1">
+    <option value="-1" selected disabled> FA1 </option>
+
+    {{#each this}}
+    <option value="{{staffID}}">{{staffName}} | {{staffSurname}}</option>
+    {{/each}}
+</script>
+<script type="text/x-handlebars" id="temp_DropDownFA2">
+    <option value="-1" selected disabled> FA2 </option>
+
+    {{#each this}}
+    <option value="{{staffID}}">{{staffName}} | {{staffSurname}}</option>
+    {{/each}}
+</script>
+<script type="text/x-handlebars" id="temp_DropDownAgent">
+    <option value="-1" selected disabled> Agent </option>
+
+    {{#each this}}
+    <option value="{{staffID}}">{{staffName}} | {{staffSurname}}</option>
+    {{/each}}
+</script>
+<script type="text/x-handlebars" id="temp_DropDowncustomer">
+    <option value="-1" selected disabled> Customer </option>
+    {{#each this}}
+    <option value="{{custID}}">{{custName}}</option>
+    {{/each}}
+</script>
+<script type="text/x-handlebars" id="temp_DropDownflightStatus">
+    <option value="-1" selected disabled> Status </option>
+    {{#each this}}
+<option value="{{fltStatusID}}">{{fltStatus}}</option>
+    {{/each}}
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous"></script>
+
+<script src='~/js/FlightSchedule.js'></script>
 
 
 

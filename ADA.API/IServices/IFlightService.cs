@@ -10,5 +10,9 @@ namespace ADA.API.IServices
     {
         Flight AddFlight(Flight flight);
         Flight UpdateFlight(Flight flight);
+
+        Flight GetFlightBtID(int id);
+
+        object GetDropdownValues();
     }
 }

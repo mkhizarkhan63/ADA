@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ADA.web.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ADA.web.Areas.DashBoard.Controllers
 {
@@ -10,8 +13,30 @@ namespace ADA.web.Areas.DashBoard.Controllers
     [Route("DashBoard/[controller]/[action]")]
     public class FlightController : Controller
     {
-        public IActionResult Flight() { 
+        public readonly IHttpContextAccessor _httpContextAccessor;
+
+       
+        public IActionResult Flight() {
             return View();
         }
+
+
+
+        [HttpPost]
+        public Task<object> GetAllOrderApproval()
+        {
+            string content = "";
+            
+            //JsonConvert.SerializeObject(obj);
+            //var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            //var byteContent = new ByteArrayContent(buffer);
+            //string a=HttpContext.Session.GetString("authorization");
+
+
+            return HttpClientUtility.CustomHttpForGetAll("Locla:3435/", "api/OrderApproval/GetAll", content, HttpContext);
+        }
+
     }
+
 }
+
