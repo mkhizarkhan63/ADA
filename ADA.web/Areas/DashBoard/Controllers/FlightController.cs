@@ -23,7 +23,7 @@ namespace ADA.web.Areas.DashBoard.Controllers
 
 
         [HttpPost]
-        public Task<object> GetAllOrderApproval()
+        public Task<object> GetAllFlights()
         {
             string content = "";
             
@@ -33,7 +33,7 @@ namespace ADA.web.Areas.DashBoard.Controllers
             //string a=HttpContext.Session.GetString("authorization");
 
 
-            return HttpClientUtility.CustomHttpForGetAll("Locla:3435/", "api/OrderApproval/GetAll", content, HttpContext);
+            return HttpClientUtility.CustomHttpForGetAll("localhost:44317/", "api/Flight/GetAll", content, HttpContext);
         }
 
     }

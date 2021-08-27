@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ADAClassLibrary
@@ -84,23 +85,36 @@ namespace ADAClassLibrary
         public string StaffGrp { get; set; }
     }
 
-    public class Flight
+    public class Flight : FlightView
     {
+       
         public int FltID { get; set; }
         public DateTime? FltDateTime { get; set; }
         public string FltNumber { get; set; }
+
+        [JsonIgnore]
         public int DestID { get; set; }
+        [JsonIgnore]
         public int DestID2 { get; set; }
         public string FltColor { get; set; }
+        [JsonIgnore]
         public int FltStatus_Fk { get; set; }
         public string FltRoute { get; set; }
+        [JsonIgnore]
         public int PilotID1_Fk { get; set; }
+        [JsonIgnore]
         public int PilotID2_Fk { get; set; }
+        [JsonIgnore]
         public int PilotID3_Fk { get; set; }
+        [JsonIgnore]
         public int FAID1_FK { get; set; }
+        [JsonIgnore]
         public int FAID2_FK { get; set; }
+        [JsonIgnore]
         public int FAID3_FK { get; set; }
+        [JsonIgnore]
         public int FAID4_FK { get; set; }
+        [JsonIgnore]
         public int CustID_Fk { get; set; }
         public int RsrvdSeats { get; set; }
         public bool SeatMap { get; set; }
@@ -119,7 +133,9 @@ namespace ADAClassLibrary
         public int AftCargo6 { get; set; }
         public string GateNum { get; set; }
         public DateTime FltTimeStamp { get; set; }
+        [JsonIgnore]
         public int AgentID_Fk { get; set; }
+        [JsonIgnore]
         public int ClosingAgentID_Fk { get; set; }
         public DateTime? ClosingTimeStamp { get; set; }
         public int ActualDepTime { get; set; }
@@ -128,10 +144,34 @@ namespace ADAClassLibrary
         public string SubManifest { get; set; }
         public bool ShowRCS { get; set; }
         public DateTime? FltTSEdit { get; set; }
+        [JsonIgnore]
         public int FltTSEditAgentID_Fk { get; set; }
+        [JsonIgnore]
         public int AircraftID_Fk { get; set; }
 
     }
+
+    public class FlightView 
+    {
+
+        public string Dest1 { get; set; }
+        public string Dest2 { get; set; }
+        public string FltStatus { get; set; }
+        public string Pilot1 { get; set; }
+        public string Pilot2 { get; set; }
+        public string Pilot3 { get; set; }
+        public string FA1 { get; set; }
+        public string FA2 { get; set; }
+        public string FA3 { get; set; }
+        public string FA4 { get; set; }
+        public string Customer { get; set; }
+        public string Agent { get; set; }
+        public string ClosingAgent { get; set; }
+        public string FltTSEditAgent { get; set; }
+        public string Aircraft { get; set; }
+    }
+
+
 
     public class Destination
     {

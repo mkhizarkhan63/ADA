@@ -72,7 +72,9 @@ namespace ADA.API.Repositories
         public List<Flight> GetAll()
         {
             DynamicParameters parameters = new DynamicParameters();
-            return _dapper.GetAll<Flight>(@"[dbo].[usp_getFlights]", parameters);
+
+              var data =   _dapper.GetAll<Flight>(@"[dbo].[usp_getFlights]", parameters);
+            return data;
         }
 
         public Flight GetByID(int id)

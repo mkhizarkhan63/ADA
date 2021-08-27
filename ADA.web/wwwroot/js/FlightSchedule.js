@@ -56,16 +56,18 @@ var example2 = "#example2";
 
 $(document).ready(function () {
 
+    GetFlights();
+
     $.ajax({
         type: "POST",
         url: "https://localhost:44317/api/Flight/GetAllDropdowns",
- 
+
         success: function (data) {
             fillData(data.data.arcraft, '#temp_DropDownaircraft', AircraftType, false);
             fillData(data.data.destination, '#temp_DropDowndest1', Dest1, false);
             fillData(data.data.destination, '#temp_DropDowndest2', Dest2, false);
             fillData(data.data.pilot, '#temp_DropDownpilot1', Pilot1, false);
-            fillData(data.data.pilot, '#temp_DropDownpilot2', Pilot2, false);    
+            fillData(data.data.pilot, '#temp_DropDownpilot2', Pilot2, false);
             fillData(data.data.pilot, '#temp_DropDownobserver', Observer, false);
             fillData(data.data.staff, '#temp_DropDownFA1', FA1, false);
             fillData(data.data.staff, '#temp_DropDownFA2', FA2, false);
@@ -83,106 +85,106 @@ $(document).ready(function () {
 
     });
 
-   
+
 
     FrtBagTotal = Frt + Bag
 
 
-$('#Save').click(function () {
+    $('#Save').click(function () {
 
-    var FlightColor = `${$(FlightColor1).val()},${$(FlightColor2).val()}`
-    var SubManifest = `${$(ManifestColor1).val() != null && $(ManifestColor1).val() != -1 ? $(ManifestColor1).val() : "---"}${$(UsefulWeight1).val() > 0 ? $(UsefulWeight1).val() : "---"},${$(ManifestColor2).val() != null && $(ManifestColor2).val() != -1 ? $(ManifestColor2).val() : "---"}${$(UsefulWeight2).val() > 0 ? $(UsefulWeight2).val() : "---"},${$(ManifestColor3).val() != null && $(ManifestColor3).val() != -1 ? $(ManifestColor3).val() : "---"}${$(UsefulWeight3).val() > 0 ? $(UsefulWeight3).val() : "---"},${$(UsefulWeightColor1).val() != null && $(UsefulWeightColor1).val() != -1 ? $(UsefulWeightColor1).val() : "---"}${$(UsefulWeightBeta1).val() > 0 ? $(UsefulWeightBeta1).val() : "---"},${$(UsefulWeightColor2).val() != null && $(UsefulWeightColor2).val() != -1 ? $(UsefulWeightColor2).val() : "---"}${$(UsefulWeightBeta2).val() > 0 ? $(UsefulWeightBeta2).val() : "---"},${$(UsefulWeightColor3).val() != null && $(UsefulWeightColor3).val() != -1 ? $(UsefulWeightColor3).val() : "---"}${$(UsefulWeightBeta3).val() > 0 ? $(UsefulWeightBeta3).val() : "---"}`
+        var FlightColor = `${$(FlightColor1).val()},${$(FlightColor2).val()}`
+        var SubManifest = `${$(ManifestColor1).val() != null && $(ManifestColor1).val() != -1 ? $(ManifestColor1).val() : "---"}${$(UsefulWeight1).val() > 0 ? $(UsefulWeight1).val() : "---"},${$(ManifestColor2).val() != null && $(ManifestColor2).val() != -1 ? $(ManifestColor2).val() : "---"}${$(UsefulWeight2).val() > 0 ? $(UsefulWeight2).val() : "---"},${$(ManifestColor3).val() != null && $(ManifestColor3).val() != -1 ? $(ManifestColor3).val() : "---"}${$(UsefulWeight3).val() > 0 ? $(UsefulWeight3).val() : "---"},${$(UsefulWeightColor1).val() != null && $(UsefulWeightColor1).val() != -1 ? $(UsefulWeightColor1).val() : "---"}${$(UsefulWeightBeta1).val() > 0 ? $(UsefulWeightBeta1).val() : "---"},${$(UsefulWeightColor2).val() != null && $(UsefulWeightColor2).val() != -1 ? $(UsefulWeightColor2).val() : "---"}${$(UsefulWeightBeta2).val() > 0 ? $(UsefulWeightBeta2).val() : "---"},${$(UsefulWeightColor3).val() != null && $(UsefulWeightColor3).val() != -1 ? $(UsefulWeightColor3).val() : "---"}${$(UsefulWeightBeta3).val() > 0 ? $(UsefulWeightBeta3).val() : "---"}`
 
-    var checkedRCS = $(RCS).is(':checked');
-    var checkedSeatMap = $(SeatMap).is(':checked');
-    var checkedSplitGender = $(SplitGender).is(':checked');
+        var checkedRCS = $(RCS).is(':checked');
+        var checkedSeatMap = $(SeatMap).is(':checked');
+        var checkedSplitGender = $(SplitGender).is(':checked');
 
 
-    var data = {
-        "FltDateTime": $(ETD).val(),
-        "FltNumber": $(FlightNumber).val(),
-        "SeatMap": checkedSeatMap,
-        "DestID": Number($(Dest1).val()),
-        "DestID2": Number($(Dest2).val()),
-        "AircraftID_Fk": Number($(AircraftType).val()),
-        "ShowRCS": checkedRCS,
-        "FltColor": FlightColor,
-        "FltRoute": $(Route).val(),
-       "SubManifest": SubManifest,
-        "PilotID1_Fk": Number($(Pilot1).val()),
-        "PilotID2_Fk": Number($(Pilot2).val()),
-        "PilotID3_Fk": Number($(Observer).val()),
-        "FAID1_FK": Number($(FA1).val()),
-        "FAID2_FK": Number($(FA2).val()),
-        "CustID_Fk": Number($(Customer).val()),
-        //       /* PaxList: PaxList,*/
-        "Fuel": Number($(Fuel).val()),
-        "SplitGender": checkedSplitGender,
-        ///* MaxCargo: Number(MaxCargo),*/
-        "Temperature": Number($(Temperature).val()),
+        var data = {
+            "FltDateTime": $(ETD).val(),
+            "FltNumber": $(FlightNumber).val(),
+            "SeatMap": checkedSeatMap,
+            "DestID": Number($(Dest1).val()),
+            "DestID2": Number($(Dest2).val()),
+            "AircraftID_Fk": Number($(AircraftType).val()),
+            "ShowRCS": checkedRCS,
+            "FltColor": FlightColor,
+            "FltRoute": $(Route).val(),
+            "SubManifest": SubManifest,
+            "PilotID1_Fk": Number($(Pilot1).val()),
+            "PilotID2_Fk": Number($(Pilot2).val()),
+            "PilotID3_Fk": Number($(Observer).val()),
+            "FAID1_FK": Number($(FA1).val()),
+            "FAID2_FK": Number($(FA2).val()),
+            "CustID_Fk": Number($(Customer).val()),
+            //       /* PaxList: PaxList,*/
+            "Fuel": Number($(Fuel).val()),
+            "SplitGender": checkedSplitGender,
+            ///* MaxCargo: Number(MaxCargo),*/
+            "Temperature": Number($(Temperature).val()),
 
-        "RsrvdSeats": Number($(RsrvdSeats).val()),
+            "RsrvdSeats": Number($(RsrvdSeats).val()),
 
-        "GateNum": $(GateNumber).val(),
-        "FltStatus_Fk":  Number($(FlightStatus).val()),
+            "GateNum": $(GateNumber).val(),
+            "FltStatus_Fk": Number($(FlightStatus).val()),
 
-//// Frt: Frt,
+            //// Frt: Frt,
 
-////Bag: Bag,
+            ////Bag: Bag,
 
-////FrtBagTotal: FrtBagTotal,
-//        Payload : 0,
+            ////FrtBagTotal: FrtBagTotal,
+            //        Payload : 0,
 
-        "FwdCargo1": Number($(FWDcargo1).val()),
+            "FwdCargo1": Number($(FWDcargo1).val()),
 
-        "FwdCargo2": Number($(FWDcargo2).val()),
+            "FwdCargo2": Number($(FWDcargo2).val()),
 
-        "FwdCargo3": Number($(FWDcargo3).val()),
+            "FwdCargo3": Number($(FWDcargo3).val()),
 
-        "FwdCargo4": Number($(FWDcargo4).val()),
+            "FwdCargo4": Number($(FWDcargo4).val()),
 
-        "AftCargo1": Number($(AFTcargo1).val()),
+            "AftCargo1": Number($(AFTcargo1).val()),
 
-                "AftCargo2": Number($(AFTcargo2).val()),
+            "AftCargo2": Number($(AFTcargo2).val()),
 
-                    "AftCargo3": Number($(AFTcargo3).val()),
+            "AftCargo3": Number($(AFTcargo3).val()),
 
-                        "AftCargo4": Number($(AFTcargo4).val()),
+            "AftCargo4": Number($(AFTcargo4).val()),
 
-                            "AftCargo5": Number($(AFTcargo5).val()),
+            "AftCargo5": Number($(AFTcargo5).val()),
 
-                                "AftCargo6": Number($(AFTcargo6).val()),
-
-    
-
-        "AgentID_Fk": Number($(Agent).val()),
-        "ActualDepTime": Number($(ATD).val()),
-
-        "FltRemarks": $(Remarks).val()
+            "AftCargo6": Number($(AFTcargo6).val()),
 
 
 
-    };
+            "AgentID_Fk": Number($(Agent).val()),
+            "ActualDepTime": Number($(ATD).val()),
 
-    console.log(data.flightStatus);
+            "FltRemarks": $(Remarks).val()
 
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        url: 'https://localhost:44317/api/Flight/Add',
-        data: JSON.stringify(data),
 
-        success: function (data) {
-            console.log('Submission was successful.');
-            console.log(data);
-        },
-        error: function (data) {
-            console.log('An error occurred.');
-            console.log(data);
-        },
+
+        };
+
+        console.log(data.flightStatus);
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            url: 'https://localhost:44317/api/Flight/Add',
+            data: JSON.stringify(data),
+
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
     });
-});
 
 });
 
@@ -210,7 +212,7 @@ $('#Edit').click(function () {
         //},
         success: function (data) {
             console.log(data);
-           
+
         },
         failure: function (error) {
             console.log(error);
@@ -220,13 +222,13 @@ $('#Edit').click(function () {
 });
 
 
-function GetAllBranchTarget() {
+function GetFlights() {
     //DataTable
-    LoaderShow();
+    /* LoaderShow();*/
 
-    oTable = $(dt_TeamTarget).DataTable({
+    $("#FlightsTable").DataTable({
         //"responsive": true,
-        "lengthChange": true,
+        
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -235,230 +237,256 @@ function GetAllBranchTarget() {
         "orderClasses": false,
         //"dom": '<"top"i>rt<"bottom"lp><"clear">',
         //"paging": !0,
-        "aaSorting": [
-            [11, 'desc']
-        ],
-        "initComplete": function (settings, json) {
-            HideKeys();
-        },
+        //"aaSorting": [
+        //    [11, 'desc']
+        //],
+        //"initComplete": function (settings, json) {
+        //    HideKeys();
+        //},
 
         "ajax": {
-            "url": BaseUrl + "/GoalsModule/GetAllBranchTarget",
+
+            "url": "/Areas/DashBoard/Controllers/Flight/GetAllFlights",
             "type": "POST",
 
-            'beforeSend': function (request) {
 
+            "datasrc": function (data) {
+                console.log(data);
+                return data.data;
             },
-            "dataSrc": function (data) {
-                if (data.Status == 200) {
-                    console.log(data);
-                    LoaderHide();
-                    if (IsPageLoad) {
-                        //GetAllProductsList();
-                        IsPageLoad = false;
 
-                    }
 
-                }
-
-                if (data.Status == 401) {
-                    LoaderHide();
-                    localStorage.removeItem("Menu");
-                    localStorage.removeItem("userData");
-                    window.location.href = baseWebUrl + "Account/Authenticate";
-                }
-                if (data.Status == 403) {
-                    LoaderHide();
-                    swal(data.ResponseMsg, {
-                        icon: "error",
-                        title: "Error",
-                    });
-                }
-
-                if (data.Status == 420) {
-                    LoaderHide();
-                    localStorage.removeItem("Menu");
-                    localStorage.removeItem("userData");
-                    window.location.href = baseWebUrl + "Account/Authenticate";
-                }
-
-                if (data.Status == 500) {
-                    LoaderHide();
-                    swal({
-                        title: "Error",
-                        text: data.ResponseMsg,
-                        icon: "error",
-                        dangerMode: true,
-                    })
-                }
-
-                if (data.Status == 600) {
-
-                    swal({
-                        title: "Error",
-                        text: data.ResponseMsg,
-                        icon: "error",
-                        dangerMode: true,
-                    })
-                }
-                LoaderHide();
-                return data.Data;
-
+            "columnDefs": [{
+                "targets": [0],
+                "visible": true,
+                "searchable": false,
+                "sortable": false
             }
-        },
+            ],
 
-        "columnDefs": [{
-            "targets": [9],
-            "visible": true,
-            "searchable": false,
-            "sortable": false
-        },
-        {
-            "targets": [12],
-            "visible": true,
-            "searchable": false,
-            "sortable": false
+            "columns": [
+                {
+                    "data": "fltID",
+                    "name": "fltID",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fltDateTime",
+                    "name": "fltDateTime",
+                    "autoWidth": true
+                }, {
+                    "data": "fltNumber",
+                    "name": "fltNumber",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fltColor",
+                    "name": "fltColor",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fltRoute",
+                    "name": "fltRoute",
+                    "autoWidth": true
+                },
+                {
+                    "data": "rsrvdSeats",
+                    "name": "rsrvdSeats",
+                    "autoWidth": true
+                },
+                {
+                    "data": "seatMap",
+                    "name": "seatMap",
+                    "autoWidth": true
+                },
+                {
+                    "data": "payload",
+                    "name": "payload",
+                    "autoWidth": true
+                },
+               
+                {
+                    "data": "fuel",
+                    "name": "fuel",
+                    "autoWidth": true
+                },
+                {
+                    "data": "temperature",
+                    "name": "temperature",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fwdCargo1",
+                    "name": "fwdCargo1",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fwdCargo2",
+                    "name": "fwdCargo2",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fwdCargo3",
+                    "name": "fwdCargo3",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fwdCargo4",
+                    "name": "fwdCargo4",
+                    "autoWidth": true
+                },
+                {
+                    "data": "aftCargo1",
+                    "name": "aftCargo1",
+                    "autoWidth": true
+                },
+                {
+                    "data": "aftCargo2",
+                    "name": "aftCargo2",
+                    "autoWidth": true
+                },
+                {
+                    "data": "aftCargo3",
+                    "name": "aftCargo3",
+                    "autoWidth": true
+                },
+                {
+                    "data": "aftCargo4",
+                    "name": "aftCargo4",
+                    "autoWidth": true
+                },
+                {
+                    "data": "aftCargo5",
+                    "name": "aftCargo5",
+                    "autoWidth": true
+                },
+                {
+                    "data": "aftCargo6",
+                    "name": "aftCargo6",
+                    "autoWidth": true
+                },
+                {
+                    "data": "gateNum",
+                    "name": "gateNum",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fltTimeStamp",
+                    "name": "fltTimeStamp",
+                    "autoWidth": true
+                },
+                {
+                    "data": "closingTimeStamp",
+                    "name": "closingTimeStamp",
+                    "autoWidth": true
+                },
+                {
+                    "data": "actualDepTime",
+                    "name": "actualDepTime",
+                    "autoWidth": true
+                }, {
+                    "data": "fltRemarks",
+                    "name": "fltRemarks",
+                    "autoWidth": true
+                }, {
+                    "data": "splitGender",
+                    "name": "splitGender",
+                    "autoWidth": true
+                }, {
+                    "data": "subManifest",
+                    "name": "subManifest",
+                    "autoWidth": true
+                }, {
+                    "data": "showRCS",
+                    "name": "showRCS",
+                    "autoWidth": true
+                }, {
+                    "data": "fltTSEdit",
+                    "name": "fltTSEdit",
+                    "autoWidth": true
+                }, {
+                    "data": "dest1",
+                    "name": "dest1",
+                    "autoWidth": true
+                },
+                {
+                    "data": "dest2",
+                    "name": "dest2",
+                    "autoWidth": true
+                }, {
+                    "data": "fltStatus",
+                    "name": "fltStatus",
+                    "autoWidth": true
+                }, {
+                    "data": "pilot1",
+                    "name": "pilot1",
+                    "autoWidth": true
+                }, {
+                    "data": "pilot2",
+                    "name": "pilot2",
+                    "autoWidth": true
+                },
+                {
+                    "data": "pilot2",
+                    "name": "pilot2",
+                    "autoWidth": true
+                }, {
+                    "data": "pilot3",
+                    "name": "pilot3",
+                    "autoWidth": true
+                }, {
+                    "data": "fA1",
+                    "name": "fA1",
+                    "autoWidth": true
+                }, {
+                    "data": "fA2",
+                    "name": "fA2",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fA3",
+                    "name": "fA3",
+                    "autoWidth": true
+                },
+                {
+                    "data": "fA4",
+                    "name": "fA4",
+                    "autoWidth": true
+                },
+                {
+                    "data": "customer",
+                    "name": "customer",
+                    "autoWidth": true
+                },
+                {
+                    "data": "agent",
+                    "name": "agent",
+                    "autoWidth": true
+                },
+                {
+                    "data": "closingAgent",
+                    "name": "closingAgent",
+                    "autoWidth": true
+                },
+
+                {
+                    "data": "fltTSEditAgent",
+                    "name": "fltTSEditAgent",
+                    "autoWidth": true
+                },
+                {
+                    "data": "aircraft",
+                    "name": "aircraft",
+                    "autoWidth": true
+                },
+                
+
+                
+            ]
         }
-        ],
 
-        "columns": [
-            {
-                "data": "CustomId",
-                "name": "CustomId",
-                "autoWidth": true
-            },
-
-            //    {
-            //    "data": "Id",
-            //    "name": "Id",
-            //    "autoWidth": true,
-            //    "render": function (data) { return '<a href="javascript:;" class=" d-block" data-id="' + data + '">' + data + '</a>' }
-            //},
-            {
-                "data": "CompanyName",
-                "name": "CompanyName",
-                "autoWidth": true
-            }, {
-                "data": "BranchName",
-                "name": "BranchName",
-                "autoWidth": true
-            },
-            {
-                "data": "TargetYear",
-                "name": "TargetYear",
-                "autoWidth": true
-            },
-            {
-                "data": "TargetType",
-                "name": "TargetType",
-                "autoWidth": true
-            },
-
-
-            {
-
-                "data": "TargetDateRange",
-                "name": "TargetDateRange",
-                "autoWidth": true,
-                "render": function (data) {
-
-                    return data;
-                }
-
-            },
-            {
-
-                "data": "Amount",
-                "name": "Amount",
-                "autoWidth": true,
-                "render": function (data) {
-                    return formatCurrency(data);
-                }
-
-            },
-            {
-                "data": "NoOfVisits",
-                "name": "NoOfVisits",
-                "autoWidth": true
-            },
-            {
-                "data": "ForcastAmount",
-                "name": "ForcastAmount",
-                "autoWidth": true,
-                "render": function (data) {
-                    return formatCurrency(data);
-                }
-            },
-
-
-
-
-            {
-
-                "render": function (data, type, full, meta) {
-                    let html = '';
-                    if (full.Products != null && full.Products.length > 0) {
-                        html = fillDataWithReturnHtml(full.Products);
-                    }
-                    return html;
-                }
-            },
-
-
-            {
-                "data": "IsTeamAssigned",
-                "name": "IsTeamAssigned",
-                "autoWidth": true,
-                "render": function (data) {
-                    if (data) {
-                        return '<h6><span class="badge badge-pill badge-primary">Yes</span></h6>'
-                    } else {
-                        return '<h6><span class="badge badge-pill badge-danger">No</span></h6>'
-                    }
-
-                }
-            },
-            //{
-            //    "data": "IsTeamMemberAssigned", "name": "IsTeamMemberAssigned", "autoWidth": true,
-            //    "render": function (data) {
-            //        if (data) {
-            //            return '<h6><span class="badge badge-pill badge-primary">Yes</span></h6>'
-            //        } else {
-            //            return '<h6><span class="badge badge-pill badge-danger">No</span></h6>'
-            //        }
-
-            //    }
-            //},
-
-            {
-                "data": "ModifiedOn",
-                "name": "ModifiedOn",
-                "autoWidth": true,
-                "render": function (data) {
-
-                    return moment(data.replace(/\Z$/, '')).format('DD/MM/YYYY hh:mm:ss a');
-                }
-            },
-
-
-            {
-                "render": function (data, type, full, meta) {
-
-
-                    return '<div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnTeamTargetEdit" title="Edit" data-id="' + full.Id + '"><i class="fa fa-pencil"></i></a></div>';
-
-                }
-            },
-
-
-        ]
-
-    }).on("draw.dt", function () {
-        HideKeys();
     });
 
     // oTable = $(dt_TeamTarget).DataTable();
-
-
 
 }
