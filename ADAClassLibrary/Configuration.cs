@@ -151,7 +151,7 @@ namespace ADAClassLibrary
 
     }
 
-    public class FlightView 
+    public class FlightView:MiniFestColors
     {
 
         public string Dest1 { get; set; }
@@ -221,7 +221,7 @@ namespace ADAClassLibrary
     }
 
 
-    public class MiniFestColors : Flight
+    public class MiniFestColors 
     {
         public string SubManifestColor1 { get; set; }
         public int SubManifestColor1Wgt { get; set; }

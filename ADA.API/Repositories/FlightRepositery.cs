@@ -65,7 +65,18 @@ namespace ADA.API.Repositories
             parameters.Add("@FltTSEdit", flight.FltTSEdit, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@FltTSEditAgentID_Fk", flight.FltTSEditAgentID_Fk, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AircraftID_Fk", flight.AircraftID_Fk, DbType.Int32, ParameterDirection.Input);
-
+            parameters.Add("@SubManifestColor1", flight.SubManifestColor1 , DbType.String , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor1Wgt", flight.SubManifestColor1Wgt , DbType.Int32 , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor2", flight.SubManifestColor2 , DbType.String , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor2Wgt", flight.SubManifestColor2Wgt , DbType.Int32 , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor3", flight.SubManifestColor3 , DbType.String , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor3Wgt", flight.SubManifestColor3Wgt , DbType.Int32 , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor4", flight.SubManifestColor4 , DbType.String , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor4Wgt", flight.SubManifestColor4Wgt , DbType.Int32 , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor5", flight.SubManifestColor5 , DbType.String , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor5Wgt", flight.SubManifestColor5Wgt , DbType.Int32 , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor6", flight.SubManifestColor6 , DbType.String , ParameterDirection.Input);
+            parameters.Add("@SubManifestColor6Wgt", flight.SubManifestColor6Wgt , DbType.Int32 , ParameterDirection.Input);
             return _dapper.Insert<Flight>(@"[dbo].[usp_insertFlight]", parameters);
         }
 

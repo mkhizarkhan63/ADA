@@ -502,32 +502,11 @@ namespace ADA.API.Controllers
                     //    CategoryData = CategoryCache
                     //};
 
-                    response.Data = new { 
-                        
-                   Dataobj=res,
-                    
-                    MiniFestcolorone= res.SubManifestColor.Split(',')[0],
-                    MiniFestcolorWeightone= res.SubManifestColor.Split(',')[1],   
-
-                    MiniFestcolorTwo=1,
-                    MiniFestcolorWeightTwo=1 ,
-
-                    MiniFestcolorThree=1,
-                    MiniFestcolorWeightThree=1,
+                    response.Data = res;
 
 
-                    MiniFestcolorfour = 1,
-                    MiniFestcolorWeightfour = 1,
-
-
-                   MiniFestcolorfive = 1,
-                   MiniFestcolorWeightfive = 1,
-
-                    MiniFestcolorsix = 1,
-                    MiniFestcolorWeightsix = 1
-
-                    };
                 }
+               
                 return response;
 
 

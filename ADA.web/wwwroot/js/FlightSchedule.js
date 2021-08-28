@@ -94,10 +94,10 @@ $(document).ready(function () {
 
 
     $('#Save').click(function () {
-
-        var FlightColor = `${$(FlightColor1).val()},${$(FlightColor2).val()}`
-        var SubManifest = `${$(ManifestColor1).val() != null && $(ManifestColor1).val() != -1 ? $(ManifestColor1).val() : "---"}${$(UsefulWeight1).val() > 0 ? $(UsefulWeight1).val() : "---"},${$(ManifestColor2).val() != null && $(ManifestColor2).val() != -1 ? $(ManifestColor2).val() : "---"}${$(UsefulWeight2).val() > 0 ? $(UsefulWeight2).val() : "---"},${$(ManifestColor3).val() != null && $(ManifestColor3).val() != -1 ? $(ManifestColor3).val() : "---"}${$(UsefulWeight3).val() > 0 ? $(UsefulWeight3).val() : "---"},${$(UsefulWeightColor1).val() != null && $(UsefulWeightColor1).val() != -1 ? $(UsefulWeightColor1).val() : "---"}${$(UsefulWeightBeta1).val() > 0 ? $(UsefulWeightBeta1).val() : "---"},${$(UsefulWeightColor2).val() != null && $(UsefulWeightColor2).val() != -1 ? $(UsefulWeightColor2).val() : "---"}${$(UsefulWeightBeta2).val() > 0 ? $(UsefulWeightBeta2).val() : "---"},${$(UsefulWeightColor3).val() != null && $(UsefulWeightColor3).val() != -1 ? $(UsefulWeightColor3).val() : "---"}${$(UsefulWeightBeta3).val() > 0 ? $(UsefulWeightBeta3).val() : "---"}`
-
+      
+        var FlightColor = `${$(FlightColor1).val()},${$(FlightColor2).val()}`;
+        var SubManifest = `${$(ManifestColor1).val() != null && $(ManifestColor1).val() != -1 ? $(ManifestColor1).val() : "---"}${$(UsefulWeight1).val() > 0 ? $(UsefulWeight1).val() : "---"},${$(ManifestColor2).val() != null && $(ManifestColor2).val() != -1 ? $(ManifestColor2).val() : "---"}${$(UsefulWeight2).val() > 0 ? $(UsefulWeight2).val() : "---"},${$(ManifestColor3).val() != null && $(ManifestColor3).val() != -1 ? $(ManifestColor3).val() : "---"}${$(UsefulWeight3).val() > 0 ? $(UsefulWeight3).val() : "---"},${$(UsefulWeightColor1).val() != null && $(UsefulWeightColor1).val() != -1 ? $(UsefulWeightColor1).val() : "---"}${$(UsefulWeightBeta1).val() > 0 ? $(UsefulWeightBeta1).val() : "---"},${$(UsefulWeightColor2).val() != null && $(UsefulWeightColor2).val() != -1 ? $(UsefulWeightColor2).val() : "---"}${$(UsefulWeightBeta2).val() > 0 ? $(UsefulWeightBeta2).val() : "---"},${$(UsefulWeightColor3).val() != null && $(UsefulWeightColor3).val() != -1 ? $(UsefulWeightColor3).val() : "---"}${$(UsefulWeightBeta3).val() > 0 ? $(UsefulWeightBeta3).val() : "---"}`;
+          
         var checkedRCS = $(RCS).is(':checked');
         var checkedSeatMap = $(SeatMap).is(':checked');
         var checkedSplitGender = $(SplitGender).is(':checked');
@@ -113,7 +113,7 @@ $(document).ready(function () {
             "ShowRCS": checkedRCS,
             "FltColor": FlightColor,
             "FltRoute": $(Route).val(),
-            "SubManifest": SubManifest,
+            "SubManifestColor": SubManifest,
             "PilotID1_Fk": Number($(Pilot1).val()),
             "PilotID2_Fk": Number($(Pilot2).val()),
             "PilotID3_Fk": Number($(Observer).val()),
@@ -162,18 +162,18 @@ $(document).ready(function () {
             "ActualDepTime": Number($(ATD).val()),
             "FltRemarks": $(Remarks).val(),
 
-            //"SubManifestColor1": $(ManifestColor1).val(),
-            //"SubManifestColor1Wgt":Number($(UsefulWeight1).val()),
-            //"SubManifestColor2": $(ManifestColor2).val(),
-            //"SubManifestColor2Wgt": Number($(UsefulWeight2).val()),
-            //"SubManifestColor3": $(ManifestColor3).val(),
-            //"SubManifestColor3Wgt": Number($(UsefulWeight3).val()),
-            //"SubManifestColor4": $(UsefulWeightColor1).val(),
-            //"SubManifestColor4Wgt": Number($(UsefulWeightBeta1).val()),
-            //"SubManifestColor5": $(UsefulWeightColor2).val(),
-            //"SubManifestColor5Wgt": Number($(UsefulWeightBeta2).val()),
-            //"SubManifestColor6": $(UsefulWeightColor3).val(),
-            //"SubManifestColor6Wgt": Number($(UsefulWeightBeta3).val()),
+            "SubManifestColor1": $(ManifestColor1).val(),
+            "SubManifestColor1Wgt":Number($(UsefulWeight1).val()),
+            "SubManifestColor2": $(ManifestColor2).val(),
+            "SubManifestColor2Wgt": Number($(UsefulWeight2).val()),
+            "SubManifestColor3": $(ManifestColor3).val(),
+            "SubManifestColor3Wgt": Number($(UsefulWeight3).val()),
+            "SubManifestColor4": $(UsefulWeightColor1).val(),
+            "SubManifestColor4Wgt": Number($(UsefulWeightBeta1).val()),
+            "SubManifestColor5": $(UsefulWeightColor2).val(),
+            "SubManifestColor5Wgt": Number($(UsefulWeightBeta2).val()),
+            "SubManifestColor6": $(UsefulWeightColor3).val(),
+            "SubManifestColor6Wgt": Number($(UsefulWeightBeta3).val()),
 
         };
 
@@ -185,8 +185,14 @@ $(document).ready(function () {
             data: JSON.stringify(data),
 
             success: function (data) {
-                console.log('Submission was successful.');
-                console.log(data);
+                
+                swal({
+                    title: "Success",
+                    text: "Submission was successful.",
+                    icon: "success",
+                    dangerMode: false,
+                })
+                
             },
             error: function (data) {
                 console.log('An error occurred.');
@@ -209,9 +215,64 @@ function GetFLightByID(id) {
 
     postRequest("https://localhost:44383/DashBoard/GetFLightByID/" + id, null, function (res) {
 
-        if (res.Status == 200)
-            if (res.Data && res.Data != null) {
+        debugger
+        if (res.status == 200)
+            if (res.data && res.data != null) {
+
                 //fillData(res.Data.ProvinceData.sort(dynamicSort("ProvinceName")), '#temp_OptionProvince', ddlProvince, true);
+                $("#FLTId").val(res.data.fltID);
+                $(ETD).val(moment(res.data.fltDateTime).format('YYYY-MM-DD'));
+                $(FlightNumber).val(res.data.fltNumber);
+                $(SeatMap).prop("checked", res.data.seatMap);
+                $(Dest1).val(res.data.destID);
+                $(Dest2).val(res.data.destID2);
+                $(AircraftType).val(res.data.aircraftID_Fk);
+                $(RCS).prop("checked", res.data.showRCS);
+                $(FlightColor1).val(res.data.fltColor.split(',')[0]);
+                $(FlightColor2).val(res.data.fltColor.split(',')[1]);
+                $(Route).val(res.data.fltRoute);
+                $(ManifestColor1).val(res.data.subManifestColor1);
+                $(ManifestColor2).val(res.data.subManifestColor2);
+                $(ManifestColor3).val(res.data.subManifestColor3);
+                $(UsefulWeight1).val(res.data.subManifestColor1Wgt);
+                $(UsefulWeight2).val(res.data.subManifestColor2Wgt);
+                $(UsefulWeight3).val(res.data.subManifestColor3Wgt);
+                $(UsefulWeightColor1).val(res.data.subManifestColor4);
+                $(UsefulWeightColor2).val(res.data.subManifestColor5);
+                $(UsefulWeightColor3).val(res.data.subManifestColor6);
+                $(UsefulWeightBeta1).val(res.data.subManifestColor4Wgt);
+                $(UsefulWeightBeta2).val(res.data.subManifestColor5Wgt);
+                $(UsefulWeightBeta3).val(res.data.subManifestColor6Wgt);
+                $(Pilot1).val(res.data.pilotID1_Fk);
+                $(Pilot2).val(res.data.pilotID2_Fk);
+                $(Observer).val(res.data.pilotID3_Fk);
+                $(FA1).val(res.data.faiD1_FK);
+                $(FA2).val(res.data.faiD2_FK);
+                $(Customer).val(res.data.custID_Fk);
+                $(PaxList).val(true);
+                $(Fuel).val(res.data.fuel);
+                $(SplitGender).prop("checked", res.data.splitGender);
+                $(MaxCargo).val("0");
+                $(Temperature).val(res.data.temperature);
+                $(RsrvdSeats).val(res.data.rsrvdSeats);
+                $(GateNumber).val(res.data.gateNum);
+                $(Frt).val("");
+                $(Bag).val("");
+                $(FrtBagTotal).val("");
+                $(FWDcargo1).val(res.data.fwdCargo1);
+                $(FWDcargo2).val(res.data.fwdCargo2);
+                $(FWDcargo3).val(res.data.fwdCargo3);
+                $(FWDcargo4).val(res.data.fwdCargo4);
+                $(AFTcargo1).val(res.data.aftCargo1);
+                $(AFTcargo2).val(res.data.aftCargo2);
+                $(AFTcargo3).val(res.data.aftCargo3);
+                $(AFTcargo4).val(res.data.aftCargo4);
+                $(AFTcargo5).val(res.data.aftCargo5);
+                $(AFTcargo6).val(res.data.aftCargo6);
+                $(FlightStatus).val(res.data.fltStatus_Fk);
+                $(Agent).val(res.data.agentID_Fk);
+                $(ATD).val(res.data.actualDepTime);
+                $(Remarks).val(res.data.fltRemarks);
                 
             }
         if (res.Status == 401) {
@@ -254,7 +315,7 @@ function GetFLightByID(id) {
                 dangerMode: true,
             })
         }
-        LoaderHide();
+  
     });
 
 
