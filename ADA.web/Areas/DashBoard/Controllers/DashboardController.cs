@@ -11,7 +11,7 @@ namespace ADA.web.Areas.DashBoard.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Flight", "Flight");
+            return RedirectToAction("Flight", "Flight" );
         }
     }
 }

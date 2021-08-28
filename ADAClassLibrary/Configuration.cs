@@ -92,29 +92,28 @@ namespace ADAClassLibrary
         public DateTime? FltDateTime { get; set; }
         public string FltNumber { get; set; }
 
-        [JsonIgnore]
         public int DestID { get; set; }
-        [JsonIgnore]
+        
         public int DestID2 { get; set; }
         public string FltColor { get; set; }
-        [JsonIgnore]
+        
         public int FltStatus_Fk { get; set; }
         public string FltRoute { get; set; }
-        [JsonIgnore]
+        
         public int PilotID1_Fk { get; set; }
-        [JsonIgnore]
+        
         public int PilotID2_Fk { get; set; }
-        [JsonIgnore]
+        
         public int PilotID3_Fk { get; set; }
-        [JsonIgnore]
+        
         public int FAID1_FK { get; set; }
-        [JsonIgnore]
+        
         public int FAID2_FK { get; set; }
-        [JsonIgnore]
+        
         public int FAID3_FK { get; set; }
-        [JsonIgnore]
+        
         public int FAID4_FK { get; set; }
-        [JsonIgnore]
+        
         public int CustID_Fk { get; set; }
         public int RsrvdSeats { get; set; }
         public bool SeatMap { get; set; }
@@ -133,21 +132,22 @@ namespace ADAClassLibrary
         public int AftCargo6 { get; set; }
         public string GateNum { get; set; }
         public DateTime FltTimeStamp { get; set; }
-        [JsonIgnore]
+        
         public int AgentID_Fk { get; set; }
-        [JsonIgnore]
+        
         public int ClosingAgentID_Fk { get; set; }
         public DateTime? ClosingTimeStamp { get; set; }
         public int ActualDepTime { get; set; }
         public string FltRemarks { get; set; }
         public bool SplitGender { get; set; }
-        public string SubManifest { get; set; }
+        public string SubManifestColor { get; set; }
         public bool ShowRCS { get; set; }
         public DateTime? FltTSEdit { get; set; }
-        [JsonIgnore]
+        
         public int FltTSEditAgentID_Fk { get; set; }
-        [JsonIgnore]
+        
         public int AircraftID_Fk { get; set; }
+
 
     }
 
@@ -217,6 +217,24 @@ namespace ADAClassLibrary
         public List<Staff> staff { get; set; }
         public List<Aircraft> arcraft { get; set; }
         public List<FlightStatus> flightStatus { get; set; }
+
+    }
+
+
+    public class MiniFestColors : Flight
+    {
+        public string SubManifestColor1 { get; set; }
+        public int SubManifestColor1Wgt { get; set; }
+        public string SubManifestColor2 { get; set; }
+        public int SubManifestColor2Wgt { get; set; }
+        public string SubManifestColor3 { get; set; }
+        public int SubManifestColor3Wgt { get; set; }
+        public string SubManifestColor4 { get; set; }
+        public int SubManifestColor4Wgt { get; set; }
+        public string SubManifestColor5 { get; set; }
+        public int SubManifestColor5Wgt { get; set; }
+        public string SubManifestColor6 { get; set; }
+        public int SubManifestColor6Wgt { get; set; }
 
     }
 

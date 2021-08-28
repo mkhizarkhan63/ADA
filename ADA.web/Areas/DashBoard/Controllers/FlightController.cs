@@ -10,7 +10,7 @@ using System.Web;
 namespace ADA.web.Areas.DashBoard.Controllers
 {
     [Area("DashBoard")]
-    [Route("DashBoard/[controller]/[action]")]
+    [Route("DashBoard")]
     public class FlightController : Controller
     {
         public readonly IHttpContextAccessor _httpContextAccessor;
@@ -21,7 +21,7 @@ namespace ADA.web.Areas.DashBoard.Controllers
         }
 
 
-
+        [Route("GetAllFlights")]
         [HttpPost]
         public Task<object> GetAllFlights()
         {
@@ -33,7 +33,17 @@ namespace ADA.web.Areas.DashBoard.Controllers
             //string a=HttpContext.Session.GetString("authorization");
 
 
-            return HttpClientUtility.CustomHttpForGetAll("localhost:44317/", "api/Flight/GetAll", content, HttpContext);
+            return HttpClientUtility.CustomHttpForGetAll("https://localhost:44317/", "api/Flight/GetAll", content, HttpContext);
+        }
+        [Route("GetFLightByID/{Id}")]
+        [HttpPost]
+        public Task<object> GetFLightByID(int Id)
+        {
+            string content = ""; //JsonConvert.SerializeObject(obj);
+            //var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+            //var byteContent = new ByteArrayContent(buffer);
+            //string a=HttpContext.Session.GetString("authorization");
+            return HttpClientUtility.CustomHttp("https://localhost:44317/","api/Flight/GetFlightBtID/" + Id, content, HttpContext);
         }
 
     }

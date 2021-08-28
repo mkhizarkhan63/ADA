@@ -7,7 +7,9 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ADA.API.Controllers
@@ -274,70 +276,7 @@ namespace ADA.API.Controllers
                 return response;
             }
         }
-        [HttpPost("GetByID/{id}")]
-        public Response FlightGetByID(int id)
-        {
-
-            //ClaimDTO claimDTO = null;
-            Response response = new Response();
-
-            try
-            {
-                //claimDTO = TokenManager.GetValidateToken(Request);
-                //if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
-
-
-                //List<Company> res;
-                //if (!claimDTO.DesignationId.Contains(1))
-                //{
-                //    res = cacheManager.TryGetValue(cacheName).ToList().Where(x => x.Active == true && claimDTO.Companies.Any(c => c == x.Id)).ToList();
-                //}
-                //else
-                //{
-                var res = cacheManager.TryGetValue(cacheName).ToList().Where(x => x.FltID == id);
-                // }
-
-                response = CustomStatusResponse.GetResponse(200);
-                //  response.Token = TokenManager.GenerateToken(claimDTO);
-
-                response.Data = res;
-
-                return response;
-
-
-
-            }
-            catch (DbException ex)
-            {
-                //WriteFileLogger.WriteLog(_env, Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetAllActive", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 600, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
-                //_loggerService.CreateLog(Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetAllActive", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 600, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
-
-                response = CustomStatusResponse.GetResponse(600);
-                //response.Token = TokenManager.GenerateToken(claimDTO);
-                //if (IsDBExceptionEnabeled)
-                //{
-                //    response.ResponseMsg = "An Error Occured";
-                //}
-                //else
-                //{
-
-                response.ResponseMsg = ex.Message;
-                //}
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                //WriteFileLogger.WriteLog(_env, Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetAllActive", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 500, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
-                //_loggerService.CreateLog(Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetAllActive", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 500, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
-
-                response = CustomStatusResponse.GetResponse(500);
-                //response.Token = TokenManager.GenerateToken(claimDTO);
-                response.ResponseMsg = "Internal server error!";
-                return response;
-            }
-
-        }
+      
 
         [HttpPost("GetAll")]
         public Pagination GetAll()
@@ -428,27 +367,46 @@ namespace ADA.API.Controllers
                 //Sorting  
                 if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
                 {
+
+
+                    string str = sortColumn;
+
+
+                    sortColumn=sortColumn = char.ToUpper(str[0]) + str.Substring(1);
+
+                    //CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+                    //TextInfo textInfo = cultureInfo.TextInfo;
+
+                    //sortColumn= sortColumn=textInfo.ToTitleCase(sortColumn);
+
                     if (sortColumnDir == "asc")
                     {
-                      //  Data = Data.OrderBy(item => typeof(Branch).GetProperty(sortColumn)?.GetValue(item)).ToList();
+
+                        
+                    Data = Data.OrderBy(item => typeof(Flight).GetProperty(sortColumn)?.GetValue(item)).ToList();
                     }
                     else
                     {
-                      //  Data = Data.OrderByDescending(item => typeof(Branch).GetProperty(sortColumn)?.GetValue(item)).ToList();
+                     Data = Data.OrderByDescending(item => typeof(Flight).GetProperty(sortColumn)?.GetValue(item)).ToList();
                     }
                 }
+
+
+                recordsTotal = Data.Count();
                 //Search  
                 if (!string.IsNullOrEmpty(searchValue))
                 {
                     searchValue = searchValue?.ToLower();
 
-                   // Data = Data.Where(m => m.Id.Value.ToString().Contains(searchValue) || m.Name.ToString().ToLower().Contains(searchValue) || m.PhoneNo1.ToString().ToLower().Contains(searchValue) || m.PhoneNo2.ToString().ToLower().Contains(searchValue) || m.MobileNo.ToString().ToLower().Contains(searchValue) || m.Code.ToString().ToLower().Contains(searchValue) || m.ModifiedOn.Value.ToString("dd/MM/yyyy hh:mm:ss tt").ToLower().Contains(searchValue) || (m.Active.ToString() != "True" ? "No" : "Yes").ToLower().Contains(searchValue))?.ToList();
+                   Data = Data.Where(m => m.FltID.ToString().Contains(searchValue) ||
+                   m.FltStatus.ToString().ToLower().Contains(searchValue) 
+                  )?.ToList();
                 }
 
 
 
                 //total number of rows count     
-               // recordsTotal = Data.Count();
+               
                 //Paging  
                 //List<Branch> list = new List<Branch>();
                 //if (sortColumn == "ModifiedOn" && sortColumnDir == "desc")
@@ -503,7 +461,117 @@ namespace ADA.API.Controllers
         }
 
 
+        [HttpPost("GetFlightBtID/{Id}")]
+        public Response GetFlightBtID(int Id)
+        {
+
+            //ClaimDTO claimDTO = null;
+            Response response = new Response();
+
+            try
+            {
+                //claimDTO = TokenManager.GetValidateToken(Request);
+                //if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
+
+
+
+                var res = cacheManager.TryGetValue(cacheName).ToList().FirstOrDefault(x => x.FltID == Id);
+
+                //var res = _service.GetBranchById(id);
+
+                response = CustomStatusResponse.GetResponse(200);
+                //response.Token = TokenManager.GenerateToken(claimDTO);
+                if (res != null)
+                {
+                    //var provinceCache = new CacheManager<Province>(_memoryCache, _provinceService).TryGetValue(provinceCacheName).Where(x => x.CountryId == res.CountryId).ToList();
+                    //var regionCache = new CacheManager<Region>(_memoryCache, _regionService).TryGetValue(regionCacheName).Where(x => x.ProvinceId == res.ProvinceId).ToList();
+                    //var cityCache = new CacheManager<City>(_memoryCache, _cityService).TryGetValue(cityCacheName).Where(x => x.RegionId == res.RegionId).ToList();
+                    //var districtCache = new CacheManager<District>(_memoryCache, _districtService).TryGetValue(districtCacheName).Where(x => x.CityId == res.CityId).ToList();
+                    //var areaCache = new CacheManager<Area>(_memoryCache, _areaService).TryGetValue(areaCacheName).Where(x => x.DistrictId == res.DistrictId).ToList();
+
+                    //var CategoryCache = new CacheManager<Companycategory>(_memoryCache, _companyCatergoryService).TryGetValue(CompanyCategorycacheName).Where(x => res.CategoryIds.Contains(x.Id)).ToList();
+
+                    //response.Data = new
+                    //{
+                    //    DataObj = res,
+                    //    ProvinceData = provinceCache,
+                    //    RegionData = regionCache,
+                    //    CityData = cityCache,
+                    //    DistrictData = districtCache,
+                    //    AreaData = areaCache,
+                    //    CategoryData = CategoryCache
+                    //};
+
+                    response.Data = new { 
+                        
+                   Dataobj=res,
+                    
+                    MiniFestcolorone= res.SubManifestColor.Split(',')[0],
+                    MiniFestcolorWeightone= res.SubManifestColor.Split(',')[1],   
+
+                    MiniFestcolorTwo=1,
+                    MiniFestcolorWeightTwo=1 ,
+
+                    MiniFestcolorThree=1,
+                    MiniFestcolorWeightThree=1,
+
+
+                    MiniFestcolorfour = 1,
+                    MiniFestcolorWeightfour = 1,
+
+
+                   MiniFestcolorfive = 1,
+                   MiniFestcolorWeightfive = 1,
+
+                    MiniFestcolorsix = 1,
+                    MiniFestcolorWeightsix = 1
+
+                    };
+                }
+                return response;
+
+
+
+            }
+            catch (DbException ex)
+            {
+                //WriteFileLogger.WriteLog(_env, Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetBranchById", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 600, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
+                //_loggerService.CreateLog(Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetBranchById", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 600, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
+
+                response = CustomStatusResponse.GetResponse(600);
+                //response.Token = TokenManager.GenerateToken(claimDTO);
+                //if (IsDBExceptionEnabeled)
+                //{
+                //    response.ResponseMsg = "An Error Occured";
+                //}
+                //else
+                //{
+
+                response.ResponseMsg = ex.Message;
+                //}
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                //WriteFileLogger.WriteLog(_env, Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetBranchById", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 500, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
+                //_loggerService.CreateLog(Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "GetBranchById", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 500, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
+
+                response = CustomStatusResponse.GetResponse(500);
+                //response.Token = TokenManager.GenerateToken(claimDTO);
+                response.ResponseMsg = "Internal server error!";
+                return response;
+            }
+
+        }
+
     }
+
+
+
+
+
+ 
 }
 
 

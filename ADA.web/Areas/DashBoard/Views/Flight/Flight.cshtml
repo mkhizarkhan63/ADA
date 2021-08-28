@@ -4,7 +4,7 @@
     Layout = "~/Areas/DashBoard/Views/Shared/_DashBoardLayout.cshtml";
 }
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
@@ -505,60 +505,57 @@
                             </div>
 
                             <div class="col-md-7">
-                                <table id="FlightsTable" class="table table-responsive  table-bordered" style=" max-height: 600px;">
+                                <table id="FlightTable" class="table table-responsive  table-bordered" style=" max-height: 600px; width:100%; ">
                                     <thead>
-                                        <tr><th>FltID</th><th>FltDateTime</th><th>FltNumber</th><th>DestID</th><th>DestID2</th><th>FltColorID_Fk</th><th>FltStatus_Fk</th><th>FltRoute</th><th>PilotID1_Fk</th><th>PilotID2_Fk</th><th>PilotID3_Fk</th><th>FAID1_Fk</th><th>FAID2_Fk</th><th>FAID3_Fk</th><th>FAID4_Fk</th><th>CustID_Fk</th><th>RsrvdSeats</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+                                        <tr>
+                                            <th>FltID</th>
+                                            <th>FltDateTime</th>
+                                            <th>FltNumber</th>
+                                            <th>Dest1</th>
+                                            <th>Dest2</th>
+                                            <th>FltColor</th>
+                                            <th>FltStatus</th>
+                                            <th>FltRoute</th>
+                                            <th>Pilot1</th>
+                                            <th>Pilot2</th>
+                                            <th>Pilot3</th>
+                                            <th>FA1</th>
+                                            <th>FA2</th>
+                                            <th>Customer</th>
+                                            <th>ReservedSeats</th>
+                                            <th>SeatMap</th>
+                                            <th>Payload</th>
+                                            <th>Fuel</th>
+                                            <th>Temperature</th>
+                                            <th>FwdCargo1</th>
+                                            <th>FwdCargo2</th>
+                                            <th>FwdCargo3</th>
+                                            <th>FwdCargo4</th>
+                                            <th>AftCargo1</th>
+                                            <th>AftCargo2</th>
+                                            <th>AftCargo3</th>
+                                            <th>AftCargo4</th>
+                                            <th>AftCargo5</th>
+                                            <th>AftCargo6</th>
+                                            <th>GateNum</th>
+                                            <th>FltTimeStamp</th>
+                                            <th>Agent</th>
+                                            <th>ClosingAgent</th>
+                                            <th>ClosingTimeStamp</th>
+                                            <th>ActualDepTime</th>
+                                            <th>FltRemarks</th>
+                                            <th>SplitGender</th>
+                                            <th>subManifestColor</th>
+                                            <th>showRCS</th>
+                                            <th>FltTSEdit</th>
+                                            <th>FltTSEditAgent</th>
+                                            <th>Aircraft</th>
+                                            <th>Actions</th>
+
+                                        </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>   
-
+                                        
                                     </tbody>
 
                                 </table>
@@ -587,7 +584,8 @@
 <script type="text/x-handlebars" id="temp_DropDowndest1">
     <option value="-1" selected disabled>Dest 1</option>
     {{#each this}}
-    <option value="{{destID}}"> {{destICAO}} | {{destIATA}} | {{destName}}
+    <option value="{{destID}}">
+        {{destICAO}} | {{destIATA}} | {{destName}}
     </option>
     {{/each}}
 
@@ -650,7 +648,7 @@
 <script type="text/x-handlebars" id="temp_DropDownflightStatus">
     <option value="-1" selected disabled> Status </option>
     {{#each this}}
-<option value="{{fltStatusID}}">{{fltStatus}}</option>
+    <option value="{{fltStatusID}}">{{fltStatus}}</option>
     {{/each}}
 </script>
 
@@ -662,11 +660,3 @@
 
 
 
-<script>
-
-    $(function () {
-        $('#example2').DataTable({
-            "responsive": true, "autoWidth": true,
-        });
-    });
-</script>

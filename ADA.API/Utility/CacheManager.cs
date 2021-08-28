@@ -54,9 +54,6 @@ namespace ADA.API.Utility
             return value;
         }
 
-        public static implicit operator CacheManager<T>(CacheManager<Flight> v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
