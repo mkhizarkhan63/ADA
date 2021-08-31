@@ -30,7 +30,7 @@ var Customer = "#Customer";
 var PaxList = "#PaxList";
 var Fuel = "#Fuel";
 var SplitGender = "#SplitGender";
-var MaxCargo = "#MaxCargo";
+var Payload = "#MaxCargo";
 var Temperature = "#Temperature";
 var RsrvdSeats = "#RsrvdSeats";
 var GateNumber = "#GateNumber";
@@ -104,7 +104,7 @@ $(document).ready(function () {
 
 
         var data = {
-            "FltDateTime": $(ETD).val(),
+            "FltDateTime": $(ETD).val() == "" ? null : $(ETD).val() ,
             "FltNumber": $(FlightNumber).val(),
             "SeatMap": checkedSeatMap,
             "DestID": Number($(Dest1).val()),
@@ -123,7 +123,7 @@ $(document).ready(function () {
             //       /* PaxList: PaxList,*/
             "Fuel": Number($(Fuel).val()),
             "SplitGender": checkedSplitGender,
-            ///* MaxCargo: Number(MaxCargo),*/
+            "Payload": Number($(Payload).val()),
             "Temperature": Number($(Temperature).val()),
 
             "RsrvdSeats": Number($(RsrvdSeats).val()),
@@ -162,20 +162,23 @@ $(document).ready(function () {
             "ActualDepTime": Number($(ATD).val()),
             "FltRemarks": $(Remarks).val(),
 
-            "SubManifestColor1": $(ManifestColor1).val(),
+            "SubManifestColor1": $(ManifestColor1).val() == -1 ? "" : $(ManifestColor1).val(),
             "SubManifestColor1Wgt":Number($(UsefulWeight1).val()),
-            "SubManifestColor2": $(ManifestColor2).val(),
+            "SubManifestColor2": $(ManifestColor2).val() == -1 ? "" : $(ManifestColor2).val(),
             "SubManifestColor2Wgt": Number($(UsefulWeight2).val()),
-            "SubManifestColor3": $(ManifestColor3).val(),
+            "SubManifestColor3": $(ManifestColor3).val() == -1 ? "" : $(ManifestColor3).val(),
             "SubManifestColor3Wgt": Number($(UsefulWeight3).val()),
-            "SubManifestColor4": $(UsefulWeightColor1).val(),
+            "SubManifestColor4": $(UsefulWeightColor1).val() == -1 ? "" : $(UsefulWeightColor1).val(),
             "SubManifestColor4Wgt": Number($(UsefulWeightBeta1).val()),
-            "SubManifestColor5": $(UsefulWeightColor2).val(),
+            "SubManifestColor5": $(UsefulWeightColor2).val() == -1 ? "" : $(UsefulWeightColor2).val(),
             "SubManifestColor5Wgt": Number($(UsefulWeightBeta2).val()),
-            "SubManifestColor6": $(UsefulWeightColor3).val(),
+            "SubManifestColor6": $(UsefulWeightColor3).val() == -1 ? "" : $(UsefulWeightColor3).val(),
             "SubManifestColor6Wgt": Number($(UsefulWeightBeta3).val()),
 
         };
+        console.log(data);
+        debugger;
+        
 
         $.ajax({
             type: "POST",
@@ -203,6 +206,7 @@ $(document).ready(function () {
 
     $(document).on('click', btnEdit, function (e) {
         let id = $(e.currentTarget).data('id');
+        
         GetFLightByID(id);
     });
 
@@ -215,7 +219,7 @@ function GetFLightByID(id) {
 
     postRequest("https://localhost:44383/DashBoard/GetFLightByID/" + id, null, function (res) {
 
-        debugger
+        
         if (res.status == 200)
             if (res.data && res.data != null) {
 
@@ -320,13 +324,6 @@ function GetFLightByID(id) {
 
 
 }
-
-
-
-
-
-
-
 
 
 

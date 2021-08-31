@@ -131,7 +131,7 @@ namespace ADAClassLibrary
         public int AftCargo5 { get; set; }
         public int AftCargo6 { get; set; }
         public string GateNum { get; set; }
-        public DateTime FltTimeStamp { get; set; }
+        public DateTime? FltTimeStamp { get; set; }
         
         public int AgentID_Fk { get; set; }
         
