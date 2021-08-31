@@ -117,11 +117,11 @@ namespace ADA.API.Repositories
             DynamicParameters parameters = new DynamicParameters();
 
             parameters.Add("@FltID", flight.FltID, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@FltDateTime", flight.FltDateTime, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("@FltDateTime", flight.FltDateTime, DbType.DateTime2, ParameterDirection.Input);
             parameters.Add("@FltNumber", flight.FltNumber, DbType.String, ParameterDirection.Input);
             parameters.Add("@DestID", flight.DestID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@DestID2", flight.DestID2, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@FltColorID_Fk", flight.FltColor, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@FltColor", flight.FltColor, DbType.String, ParameterDirection.Input);
             parameters.Add("@FltStatus_Fk", flight.FltStatus_Fk, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@FltRoute", flight.FltRoute, DbType.String, ParameterDirection.Input);
             parameters.Add("@PilotID1_Fk", flight.PilotID1_Fk, DbType.Int32, ParameterDirection.Input);
@@ -148,18 +148,30 @@ namespace ADA.API.Repositories
             parameters.Add("@AftCargo5", flight.AftCargo5, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AftCargo6", flight.AftCargo6, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@GateNum", flight.GateNum, DbType.String, ParameterDirection.Input);
-            parameters.Add("@FltTimeStamp", flight.FltTimeStamp, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("@FltTimeStamp", flight.FltTimeStamp, DbType.DateTime2, ParameterDirection.Input);
             parameters.Add("@AgentID_Fk", flight.AgentID_Fk, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ClosingAgentID_Fk", flight.ClosingAgentID_Fk, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@ClosingTimeStamp", flight.ClosingTimeStamp, DbType.DateTime , ParameterDirection.Input);
+            parameters.Add("@ClosingTimeStamp", flight.ClosingTimeStamp, DbType.DateTime2, ParameterDirection.Input);
             parameters.Add("@ActualDepTime", flight.ActualDepTime, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@FltRemarks", flight.FltRemarks, DbType.String, ParameterDirection.Input);
             parameters.Add("@SplitGender", flight.SplitGender, DbType.Boolean, ParameterDirection.Input);
-            parameters.Add("@SubManifestID_Fk", flight.SubManifestColor, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifest", flight.SubManifestColor, DbType.String, ParameterDirection.Input);
             parameters.Add("@ShowRCS", flight.ShowRCS, DbType.Boolean, ParameterDirection.Input);
-            parameters.Add("@FltTSEdit", flight.FltTSEdit, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("@FltTSEdit", flight.FltTSEdit, DbType.DateTime2, ParameterDirection.Input);
             parameters.Add("@FltTSEditAgentID_Fk", flight.FltTSEditAgentID_Fk, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AircraftID_Fk", flight.AircraftID_Fk, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor1", flight.SubManifestColor1, DbType.String, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor1Wgt", flight.SubManifestColor1Wgt, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor2", flight.SubManifestColor2, DbType.String, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor2Wgt", flight.SubManifestColor2Wgt, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor3", flight.SubManifestColor3, DbType.String, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor3Wgt", flight.SubManifestColor3Wgt, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor4", flight.SubManifestColor4, DbType.String, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor4Wgt", flight.SubManifestColor4Wgt, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor5", flight.SubManifestColor5, DbType.String, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor5Wgt", flight.SubManifestColor5Wgt, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor6", flight.SubManifestColor6, DbType.String, ParameterDirection.Input);
+            parameters.Add("@SubManifestColor6Wgt", flight.SubManifestColor6Wgt, DbType.Int32, ParameterDirection.Input);
 
             return _dapper.Update<Flight>(@"[dbo].[usp_updateFlight]", parameters);
         }

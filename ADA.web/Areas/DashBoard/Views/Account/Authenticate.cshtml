@@ -1,0 +1,176 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Envicrete</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/fontawesome-free/css/all.min.css")">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css")">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/icheck-bootstrap/icheck-bootstrap.min.css")">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/jqvmap/jqvmap.min.css")">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css")">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/daterangepicker/daterangepicker.css")">
+    <!-- summernote -->
+    <link rel="stylesheet" href="@Url.Content("~/plugins/summernote/summernote-bs4.min.css")">
+    <!-- jQuery Loader -->
+    @*<link rel="stylesheet" href="@Url.Content("~/plugins/JQuery-btn-Loader/buttonLoader.css")">*@
+    <!-- Theme style -->
+    <link rel="stylesheet" href="@Url.Content("~/dist/css/adminlte.css")">
+
+    @*<link rel="stylesheet" href="@Url.Content("~/dist/css/Login.css")">*@
+    @*<base href='@Url.Content("110.93.228.86:8181/EnvicreteWebApp/")'>*@
+    @*<base href='@Url.Content("http://localhost:39782/")'>*@
+</head>
+<body class="login-page" style="min-height: 466px;">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center logoherder">
+                <img src="@Url.Content("~/dist/img/Logo-2-1.png")" alt="Logo" class="card-img-top bg-gradient-white">
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg" id="lblMessage">Sign in to start your session</p>
+
+                <form id="loginForm">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Email" id="txtUsername" name="txtUsername">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="txtPassword" placeholder="Password" name="txtPassword">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>*@
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="button" class="btn btn-primary btn-block  has-spinner" id="btnLogin">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+
+
+
+                @*<p class="mb-1">
+                    <a href="Account/ForgotPassword">I forgot my password</a>
+                </p>*@
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
+    @*<div class="card login-form">
+            <img src="@Url.Content("~/dist/img/LogoEnvicrete.png")" alt="Logo" class="card-img-top bg-gradient-white">
+            <div class="card-body">
+
+
+
+                <div class="card-text">
+
+
+                    <form id="loginForm">
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="text" class="form-control form-control-sm" id="txtUsername" name="txtUsername" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <a href="Account/ForgotPassword" style="float:right;font-size:12px;">Forgot password?</a>
+                            <input type="password" id="txtPassword" name="txtPassword" class="form-control form-control-sm">
+                        </div>
+                        <a href="javascript:;" class="btn btn-primary btn-block" id="btnLogin">Sign in</a>
+
+                        <div class="alert alert-danger alert-dismissible fade hide" role="alert">Incorrect username or password.</div>
+
+                    </form>
+                </div>
+            </div>
+        </div>*@
+    @*<div id="global-container">
+
+
+
+
+            <div id="floor">
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+                <div class="panel"><div class="left"> </div><div class="right"> </div><div class="front"> </div><div class="back"> </div><div class="top"> </div><div class="shadow"> </div></div>
+
+                <div id="base"> </div>
+            </div>
+        </div>*@
+
+    <input type="hidden" id="baseApiUrl" value="@Configuration.GetSection("UrlSetting").GetSection("baseApiUrl").Value" />
+    <input type="hidden" id="baseWebUrl" value="@Configuration.GetSection("UrlSetting").GetSection("baseWebUrl").Value" />
+    <input type="hidden" id="baseUrlForMVCAction" value="@Configuration.GetSection("UrlSetting").GetSection("baseUrlForMVCAction").Value" />
+    <!-- jQuery -->
+
+    <script src="@Url.Content("~/plugins/jquery/jquery.min.js")"></script>
+    @*<script src="@Url.Content("~/plugins/JQuery-btn-Loader/buttonLoader.js")"></script>*@
+    <!-- jQuery UI 1.11.4 -->
+    <script src="@Url.Content("~/plugins/jquery-ui/jquery-ui.min.js")"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>$.widget.bridge('uibutton', $.ui.button)</script>
+    <!-- Bootstrap 4 -->
+    <script src="@Url.Content("~/plugins/bootstrap/js/bootstrap.bundle.min.js")"></script>
+
+    <!-- AdminLTE App -->
+    <script src="@Url.Content("~/dist/js/adminlte.js")"></script>
+    <!-- AdminLTE for demo purposes -->
+    @*<script src="@Url.Content("~/dist/js/demo.js")"></script>*@
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/js/AdditionMethod.js")"></script>
+    <script src="@Url.Content("~/js/Authenticate.js")"></script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+</body>
+</html>

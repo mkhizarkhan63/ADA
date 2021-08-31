@@ -1,4 +1,7 @@
-﻿
+﻿let BaseUrl;
+let btnEdit = ".btnEdit";
+let Save = "#Save";
+let btnUpdate = "#Edit";
 var ETD = "#ETD";
 var FlightNumber = "#FlightNumber";
 var SeatMap = "#SeatMap";
@@ -51,155 +54,16 @@ var FlightStatus = "#FlightStatus";
 var Agent = "#Agent";
 var ATD = "#ATD";
 var Remarks = "#Remarks";
-var example2 = "#example2";
 
+ $(document).ready(function () {
+    BaseUrl = $("#baseUrlForMVCAction").val();
+    if (BaseUrl == "null")
+        BaseUrl = "";
+    baseApiUrl = $("#baseApiUrl").val();
 
-//Actions
-let btnEdit = ".btnEdit";
+    baseWebUrl = $("#baseWebUrl").val();
 
-$(document).ready(function () {
-
-    GetFlights();
-
-    $.ajax({
-        type: "POST",
-        url: "https://localhost:44317/api/Flight/GetAllDropdowns",
-
-        success: function (data) {
-            fillData(data.data.arcraft, '#temp_DropDownaircraft', AircraftType, false);
-            fillData(data.data.destination, '#temp_DropDowndest1', Dest1, false);
-            fillData(data.data.destination, '#temp_DropDowndest2', Dest2, false);
-            fillData(data.data.pilot, '#temp_DropDownpilot1', Pilot1, false);
-            fillData(data.data.pilot, '#temp_DropDownpilot2', Pilot2, false);
-            fillData(data.data.pilot, '#temp_DropDownobserver', Observer, false);
-            fillData(data.data.staff, '#temp_DropDownFA1', FA1, false);
-            fillData(data.data.staff, '#temp_DropDownFA2', FA2, false);
-            fillData(data.data.staff, '#temp_DropDownAgent', Agent, false);
-            fillData(data.data.customer, '#temp_DropDowncustomer', Customer, false);
-            fillData(data.data.flightStatus, '#temp_DropDownflightStatus', FlightStatus, false);
-
-
-        },
-        error: function (data) {
-            console.log('An error occurred.');
-            console.log(data);
-        },
-
-
-    });
-
-
-
-    FrtBagTotal = Frt + Bag
-
-
-    $('#Save').click(function () {
-      
-        var FlightColor = `${$(FlightColor1).val()},${$(FlightColor2).val()}`;
-        var SubManifest = `${$(ManifestColor1).val() != null && $(ManifestColor1).val() != -1 ? $(ManifestColor1).val() : "---"}${$(UsefulWeight1).val() > 0 ? $(UsefulWeight1).val() : "---"},${$(ManifestColor2).val() != null && $(ManifestColor2).val() != -1 ? $(ManifestColor2).val() : "---"}${$(UsefulWeight2).val() > 0 ? $(UsefulWeight2).val() : "---"},${$(ManifestColor3).val() != null && $(ManifestColor3).val() != -1 ? $(ManifestColor3).val() : "---"}${$(UsefulWeight3).val() > 0 ? $(UsefulWeight3).val() : "---"},${$(UsefulWeightColor1).val() != null && $(UsefulWeightColor1).val() != -1 ? $(UsefulWeightColor1).val() : "---"}${$(UsefulWeightBeta1).val() > 0 ? $(UsefulWeightBeta1).val() : "---"},${$(UsefulWeightColor2).val() != null && $(UsefulWeightColor2).val() != -1 ? $(UsefulWeightColor2).val() : "---"}${$(UsefulWeightBeta2).val() > 0 ? $(UsefulWeightBeta2).val() : "---"},${$(UsefulWeightColor3).val() != null && $(UsefulWeightColor3).val() != -1 ? $(UsefulWeightColor3).val() : "---"}${$(UsefulWeightBeta3).val() > 0 ? $(UsefulWeightBeta3).val() : "---"}`;
-          
-        var checkedRCS = $(RCS).is(':checked');
-        var checkedSeatMap = $(SeatMap).is(':checked');
-        var checkedSplitGender = $(SplitGender).is(':checked');
-
-
-        var data = {
-            "FltDateTime": $(ETD).val(),
-            "FltNumber": $(FlightNumber).val(),
-            "SeatMap": checkedSeatMap,
-            "DestID": Number($(Dest1).val()),
-            "DestID2": Number($(Dest2).val()),
-            "AircraftID_Fk": Number($(AircraftType).val()),
-            "ShowRCS": checkedRCS,
-            "FltColor": FlightColor,
-            "FltRoute": $(Route).val(),
-            "SubManifestColor": SubManifest,
-            "PilotID1_Fk": Number($(Pilot1).val()),
-            "PilotID2_Fk": Number($(Pilot2).val()),
-            "PilotID3_Fk": Number($(Observer).val()),
-            "FAID1_FK": Number($(FA1).val()),
-            "FAID2_FK": Number($(FA2).val()),
-            "CustID_Fk": Number($(Customer).val()),
-            //       /* PaxList: PaxList,*/
-            "Fuel": Number($(Fuel).val()),
-            "SplitGender": checkedSplitGender,
-            ///* MaxCargo: Number(MaxCargo),*/
-            "Temperature": Number($(Temperature).val()),
-
-            "RsrvdSeats": Number($(RsrvdSeats).val()),
-
-            "GateNum": $(GateNumber).val(),
-            "FltStatus_Fk": Number($(FlightStatus).val()),
-
-            //// Frt: Frt,
-
-            ////Bag: Bag,
-
-            ////FrtBagTotal: FrtBagTotal,
-            //        Payload : 0,
-
-            "FwdCargo1": Number($(FWDcargo1).val()),
-
-            "FwdCargo2": Number($(FWDcargo2).val()),
-
-            "FwdCargo3": Number($(FWDcargo3).val()),
-
-            "FwdCargo4": Number($(FWDcargo4).val()),
-
-            "AftCargo1": Number($(AFTcargo1).val()),
-
-            "AftCargo2": Number($(AFTcargo2).val()),
-
-            "AftCargo3": Number($(AFTcargo3).val()),
-
-            "AftCargo4": Number($(AFTcargo4).val()),
-
-            "AftCargo5": Number($(AFTcargo5).val()),
-
-            "AftCargo6": Number($(AFTcargo6).val()),
-
-            "AgentID_Fk": Number($(Agent).val()),
-            "ActualDepTime": Number($(ATD).val()),
-            "FltRemarks": $(Remarks).val(),
-
-            "SubManifestColor1": $(ManifestColor1).val(),
-            "SubManifestColor1Wgt":Number($(UsefulWeight1).val()),
-            "SubManifestColor2": $(ManifestColor2).val(),
-            "SubManifestColor2Wgt": Number($(UsefulWeight2).val()),
-            "SubManifestColor3": $(ManifestColor3).val(),
-            "SubManifestColor3Wgt": Number($(UsefulWeight3).val()),
-            "SubManifestColor4": $(UsefulWeightColor1).val(),
-            "SubManifestColor4Wgt": Number($(UsefulWeightBeta1).val()),
-            "SubManifestColor5": $(UsefulWeightColor2).val(),
-            "SubManifestColor5Wgt": Number($(UsefulWeightBeta2).val()),
-            "SubManifestColor6": $(UsefulWeightColor3).val(),
-            "SubManifestColor6Wgt": Number($(UsefulWeightBeta3).val()),
-
-        };
-
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            url: 'https://localhost:44317/api/Flight/Add',
-            data: JSON.stringify(data),
-
-            success: function (data) {
-                
-                swal({
-                    title: "Success",
-                    text: "Submission was successful.",
-                    icon: "success",
-                    dangerMode: false,
-                })
-                
-            },
-            error: function (data) {
-                console.log('An error occurred.');
-                console.log(data);
-            },
-        });
-    });
+     GetAllFlight();
 
     $(document).on('click', btnEdit, function (e) {
         let id = $(e.currentTarget).data('id');
@@ -207,73 +71,44 @@ $(document).ready(function () {
     });
 
 
+    $(Save).click(function () {
 
-});
+        AddFlight();
+      
+    });
 
-function GetFLightByID(id) {
- 
 
-    postRequest("https://localhost:44383/DashBoard/GetFLightByID/" + id, null, function (res) {
+   $(btnUpdate).click(function () {
+
+        UpdateFlight();
+     });
+ });
+
+
+
+function GetAllDropdown() {
+
+
+    postRequest(BaseUrl +"/DashBoard/GetAllDropdown", null, function (res) {
+
+
+
 
         debugger
         if (res.status == 200)
             if (res.data && res.data != null) {
 
-                //fillData(res.Data.ProvinceData.sort(dynamicSort("ProvinceName")), '#temp_OptionProvince', ddlProvince, true);
-                $("#FLTId").val(res.data.fltID);
-                $(ETD).val(moment(res.data.fltDateTime).format('YYYY-MM-DD'));
-                $(FlightNumber).val(res.data.fltNumber);
-                $(SeatMap).prop("checked", res.data.seatMap);
-                $(Dest1).val(res.data.destID);
-                $(Dest2).val(res.data.destID2);
-                $(AircraftType).val(res.data.aircraftID_Fk);
-                $(RCS).prop("checked", res.data.showRCS);
-                $(FlightColor1).val(res.data.fltColor.split(',')[0]);
-                $(FlightColor2).val(res.data.fltColor.split(',')[1]);
-                $(Route).val(res.data.fltRoute);
-                $(ManifestColor1).val(res.data.subManifestColor1);
-                $(ManifestColor2).val(res.data.subManifestColor2);
-                $(ManifestColor3).val(res.data.subManifestColor3);
-                $(UsefulWeight1).val(res.data.subManifestColor1Wgt);
-                $(UsefulWeight2).val(res.data.subManifestColor2Wgt);
-                $(UsefulWeight3).val(res.data.subManifestColor3Wgt);
-                $(UsefulWeightColor1).val(res.data.subManifestColor4);
-                $(UsefulWeightColor2).val(res.data.subManifestColor5);
-                $(UsefulWeightColor3).val(res.data.subManifestColor6);
-                $(UsefulWeightBeta1).val(res.data.subManifestColor4Wgt);
-                $(UsefulWeightBeta2).val(res.data.subManifestColor5Wgt);
-                $(UsefulWeightBeta3).val(res.data.subManifestColor6Wgt);
-                $(Pilot1).val(res.data.pilotID1_Fk);
-                $(Pilot2).val(res.data.pilotID2_Fk);
-                $(Observer).val(res.data.pilotID3_Fk);
-                $(FA1).val(res.data.faiD1_FK);
-                $(FA2).val(res.data.faiD2_FK);
-                $(Customer).val(res.data.custID_Fk);
-                $(PaxList).val(true);
-                $(Fuel).val(res.data.fuel);
-                $(SplitGender).prop("checked", res.data.splitGender);
-                $(MaxCargo).val("0");
-                $(Temperature).val(res.data.temperature);
-                $(RsrvdSeats).val(res.data.rsrvdSeats);
-                $(GateNumber).val(res.data.gateNum);
-                $(Frt).val("");
-                $(Bag).val("");
-                $(FrtBagTotal).val("");
-                $(FWDcargo1).val(res.data.fwdCargo1);
-                $(FWDcargo2).val(res.data.fwdCargo2);
-                $(FWDcargo3).val(res.data.fwdCargo3);
-                $(FWDcargo4).val(res.data.fwdCargo4);
-                $(AFTcargo1).val(res.data.aftCargo1);
-                $(AFTcargo2).val(res.data.aftCargo2);
-                $(AFTcargo3).val(res.data.aftCargo3);
-                $(AFTcargo4).val(res.data.aftCargo4);
-                $(AFTcargo5).val(res.data.aftCargo5);
-                $(AFTcargo6).val(res.data.aftCargo6);
-                $(FlightStatus).val(res.data.fltStatus_Fk);
-                $(Agent).val(res.data.agentID_Fk);
-                $(ATD).val(res.data.actualDepTime);
-                $(Remarks).val(res.data.fltRemarks);
-                
+                fillData(res.data.arcraft, '#temp_DropDownaircraft', AircraftType, false);
+                fillData(res.data.destination, '#temp_DropDowndest1', Dest1, false);
+                fillData(res.data.destination, '#temp_DropDowndest2', Dest2, false);
+                fillData(res.data.pilot, '#temp_DropDownpilot1', Pilot1, false);
+                fillData(res.data.pilot, '#temp_DropDownpilot2', Pilot2, false);
+                fillData(res.data.pilot, '#temp_DropDownobserver', Observer, false);
+                fillData(res.data.staff, '#temp_DropDownFA1', FA1, false);
+                fillData(res.data.staff, '#temp_DropDownFA2', FA2, false);
+                fillData(res.data.staff, '#temp_DropDownAgent', Agent, false);
+                fillData(res.data.customer, '#temp_DropDowncustomer', Customer, false);
+                fillData(res.data.flightStatus, '#temp_DropDownflightStatus', FlightStatus, false);
             }
         if (res.Status == 401) {
             LoaderHide();
@@ -315,24 +150,14 @@ function GetFLightByID(id) {
                 dangerMode: true,
             })
         }
-  
+
     });
 
 
 }
 
 
-
-
-
-
-
-
-
-
-function GetFlights() {
-    //DataTable
-    /* LoaderShow();*/
+function GetAllFlight() {
 
     $("#FlightTable").DataTable({
         "responsive": true,
@@ -343,36 +168,79 @@ function GetFlights() {
         "orderMulti": false, // for disable multiple column at once
         "pageLength": 10,
         "orderClasses": false,
-        //"dom": '<"top"i>rt<"bottom"lp><"clear">',
-        //"paging": !0,
-        "aaSorting": [
-            [11, 'desc']
-        ],
+        //"aaSorting": [
+        //    [11, 'desc']
+        //],
         //"initComplete": function (settings, json) {
         //    HideKeys();
         //},
 
         "ajax": {
-
-            "url": "https://localhost:44383/DashBoard/GetAllFlights",
+            "url": BaseUrl +"/DashBoard/GetAllFlights",
             "type": "POST",
             "dataType": "json",
 
             "dataSrc": function (data) {
 
-                console.log(data);
+                debugger;
+                if (data.status == 200) {
+                    debugger;
+                    GetAllDropdown();
+                }
+
+                if (data.status == 401) {
+
+                    window.location.href = baseWebUrl + "Dashboard";
+                }
+                if (data.status == 403) {
+
+                    swal(data.ResponseMsg, {
+                        icon: "error",
+                        title: "Error",
+                    });
+                }
+
+                if (data.status == 420) {
+
+                    localStorage.removeItem("Menu");
+                    localStorage.removeItem("userData");
+                    window.location.href = baseWebUrl + "Dashboard";
+                }
+
+                if (data.status == 500) {
+
+                    swal({
+                        title: "Error",
+                        text: data.ResponseMsg,
+                        icon: "error",
+                        dangerMode: true,
+                    })
+                }
+
+                if (data.status == 600) {
+
+                    swal({
+                        title: "Error",
+                        text: data.ResponseMsg,
+                        icon: "error",
+                        dangerMode: true,
+                    })
+                }
+
                 return data.data;
-            },
-
-
-            "columnDefs": [{
-                "targets": [0],
-                "visible": true,
-                "searchable": false,
-                "sortable": false
             }
-            ],
+
         },
+
+
+        //"columnDefs": [{
+        //    "targets": [0],
+        //    "visible": true,
+        //    "searchable": false,
+        //    "sortable": false
+        //}
+        //],
+
         "columns": [
 
             { "data": "fltID", "name": "fltID", "autoWidth": true },
@@ -592,7 +460,7 @@ function GetFlights() {
                 "render": function (data, type, full, meta) {
 
                     return '<div class="btn-group btn-group-sm"><div class="d-flex"><a href="javascript:;" class="btn btn-primary shadow btn-xs sharp mr-1 btnEdit"  title="Edit" data-id="' + full.fltID + '"><i class="fa fa-pencil"></i></a><a href="javascript:;" class= "btn shadow btn-xs sharp mr-1  btnDelete" title="Cancel Flight"  style="background: #9c3636;color: white;" data-id="' + full.fltID + '"> <i class="fa fa-times-circle" style="background: #9c3636;color: white;"></i></a><a href="javascript:;" title="Delete" class="btn btn-danger shadow btn-xs sharp mr-1 btnDeleteRecord" data-id="' + full.fltID + '"><i class="fa fa-trash"></i></a></div>';
-                    
+
 
                 }
             },
@@ -604,10 +472,410 @@ function GetFlights() {
 
 
     });
+}
 
-    // oTable = $(dt_TeamTarget).DataTable();
+
+
+function GetFLightByID(id) {
+ 
+
+    postRequest(BaseUrl +"/DashBoard/GetFLightByID/" + id, null, function (res) {
+
+        debugger
+        if (res.status == 200)
+        {
+            if (res.data && res.data != null) {
+
+                $("#FLTId").val(res.data.fltID);
+                $(ETD).val(moment(res.data.fltDateTime).format('YYYY-MM-DD'));
+                $(FlightNumber).val(res.data.fltNumber);
+                $(SeatMap).prop("checked", res.data.seatMap);
+                $(Dest1).val(res.data.destID);
+                $(Dest2).val(res.data.destID2);
+                $(AircraftType).val(res.data.aircraftID_Fk);
+                $(RCS).prop("checked", res.data.showRCS);
+                $(FlightColor1).val(res.data.fltColor.split(',')[0]);
+                $(FlightColor2).val(res.data.fltColor.split(',')[1]);
+                $(Route).val(res.data.fltRoute);
+                $(ManifestColor1).val(res.data.subManifestColor1);
+                $(ManifestColor2).val(res.data.subManifestColor2);
+                $(ManifestColor3).val(res.data.subManifestColor3);
+                $(UsefulWeight1).val(res.data.subManifestColor1Wgt);
+                $(UsefulWeight2).val(res.data.subManifestColor2Wgt);
+                $(UsefulWeight3).val(res.data.subManifestColor3Wgt);
+                $(UsefulWeightColor1).val(res.data.subManifestColor4);
+                $(UsefulWeightColor2).val(res.data.subManifestColor5);
+                $(UsefulWeightColor3).val(res.data.subManifestColor6);
+                $(UsefulWeightBeta1).val(res.data.subManifestColor4Wgt);
+                $(UsefulWeightBeta2).val(res.data.subManifestColor5Wgt);
+                $(UsefulWeightBeta3).val(res.data.subManifestColor6Wgt);
+                $(Pilot1).val(res.data.pilotID1_Fk);
+                $(Pilot2).val(res.data.pilotID2_Fk);
+                $(Observer).val(res.data.pilotID3_Fk);
+                $(FA1).val(res.data.faiD1_FK);
+                $(FA2).val(res.data.faiD2_FK);
+                $(Customer).val(res.data.custID_Fk);
+                $(PaxList).val(true);
+                $(Fuel).val(res.data.fuel);
+                $(SplitGender).prop("checked", res.data.splitGender);
+                $(MaxCargo).val("0");
+                $(Temperature).val(res.data.temperature);
+                $(RsrvdSeats).val(res.data.rsrvdSeats);
+                $(GateNumber).val(res.data.gateNum);
+                $(Frt).val("");
+                $(Bag).val("");
+                $(FrtBagTotal).val("");
+                $(FWDcargo1).val(res.data.fwdCargo1);
+                $(FWDcargo2).val(res.data.fwdCargo2);
+                $(FWDcargo3).val(res.data.fwdCargo3);
+                $(FWDcargo4).val(res.data.fwdCargo4);
+                $(AFTcargo1).val(res.data.aftCargo1);
+                $(AFTcargo2).val(res.data.aftCargo2);
+                $(AFTcargo3).val(res.data.aftCargo3);
+                $(AFTcargo4).val(res.data.aftCargo4);
+                $(AFTcargo5).val(res.data.aftCargo5);
+                $(AFTcargo6).val(res.data.aftCargo6);
+                $(FlightStatus).val(res.data.fltStatus_Fk);
+                $(Agent).val(res.data.agentID_Fk);
+                $(ATD).val(res.data.actualDepTime);
+                $(Remarks).val(res.data.fltRemarks);
+
+            }
+        }
+        if (res.Status == 401) {
+            LoaderHide();
+            localStorage.removeItem("Menu");
+            localStorage.removeItem("userData");
+            window.location.href = baseWebUrl + "Account/Authenticate";
+        }
+        if (res.Status == 403) {
+
+
+            swal(res.ResponseMsg, {
+                icon: "error",
+                title: "Error",
+            });
+        }
+        if (res.Status == 500) {
+            LoaderHide();
+            swal({
+                title: "Error",
+                text: res.ResponseMsg,
+                icon: "error",
+                dangerMode: true,
+            })
+        }
+
+        if (res.Status == 420) {
+            LoaderHide();
+            localStorage.removeItem("Menu");
+            localStorage.removeItem("userData");
+            window.location.href = baseWebUrl + "Account/Authenticate";
+        }
+
+        if (res.Status == 600) {
+
+            swal({
+                title: "Error",
+                text: res.ResponseMsg,
+                icon: "error",
+                dangerMode: true,
+            })
+        }
+  
+    });
+
 
 }
+
+function AddFlight() {
+
+    var FlightColor = `${$(FlightColor1).val()},${$(FlightColor2).val()}`;
+    var SubManifest = `${$(ManifestColor1).val() != null && $(ManifestColor1).val() != -1 ? $(ManifestColor1).val() : "---"}${$(UsefulWeight1).val() > 0 ? $(UsefulWeight1).val() : "---"},${$(ManifestColor2).val() != null && $(ManifestColor2).val() != -1 ? $(ManifestColor2).val() : "---"}${$(UsefulWeight2).val() > 0 ? $(UsefulWeight2).val() : "---"},${$(ManifestColor3).val() != null && $(ManifestColor3).val() != -1 ? $(ManifestColor3).val() : "---"}${$(UsefulWeight3).val() > 0 ? $(UsefulWeight3).val() : "---"},${$(UsefulWeightColor1).val() != null && $(UsefulWeightColor1).val() != -1 ? $(UsefulWeightColor1).val() : "---"}${$(UsefulWeightBeta1).val() > 0 ? $(UsefulWeightBeta1).val() : "---"},${$(UsefulWeightColor2).val() != null && $(UsefulWeightColor2).val() != -1 ? $(UsefulWeightColor2).val() : "---"}${$(UsefulWeightBeta2).val() > 0 ? $(UsefulWeightBeta2).val() : "---"},${$(UsefulWeightColor3).val() != null && $(UsefulWeightColor3).val() != -1 ? $(UsefulWeightColor3).val() : "---"}${$(UsefulWeightBeta3).val() > 0 ? $(UsefulWeightBeta3).val() : "---"}`;
+    var checkedRCS = $(RCS).is(':checked');
+    var checkedSeatMap = $(SeatMap).is(':checked');
+    var checkedSplitGender = $(SplitGender).is(':checked');
+    var data = {
+        "FltDateTime": $(ETD).val(),
+        "FltNumber": $(FlightNumber).val(),
+        "SeatMap": checkedSeatMap,
+        "DestID": Number($(Dest1).val()),
+        "DestID2": Number($(Dest2).val()),
+        "AircraftID_Fk": Number($(AircraftType).val()),
+        "ShowRCS": checkedRCS,
+        "FltColor": FlightColor,
+        "FltRoute": $(Route).val(),
+        "SubManifestColor": SubManifest,
+        "PilotID1_Fk": Number($(Pilot1).val()),
+        "PilotID2_Fk": Number($(Pilot2).val()),
+        "PilotID3_Fk": Number($(Observer).val()),
+        "FAID1_FK": Number($(FA1).val()),
+        "FAID2_FK": Number($(FA2).val()),
+        "CustID_Fk": Number($(Customer).val()),
+        //       /* PaxList: PaxList,*/
+        "Fuel": Number($(Fuel).val()),
+        "SplitGender": checkedSplitGender,
+        ///* MaxCargo: Number(MaxCargo),*/
+        "Temperature": Number($(Temperature).val()),
+        "RsrvdSeats": Number($(RsrvdSeats).val()),
+        "GateNum": $(GateNumber).val(),
+        "FltStatus_Fk": Number($(FlightStatus).val()),
+
+        //// Frt: Frt,
+
+        ////Bag: Bag,
+
+        ////FrtBagTotal: FrtBagTotal,
+        //        Payload : 0,
+
+        "FwdCargo1": Number($(FWDcargo1).val()),
+        "FwdCargo2": Number($(FWDcargo2).val()),
+        "FwdCargo3": Number($(FWDcargo3).val()),
+        "FwdCargo4": Number($(FWDcargo4).val()),
+        "AftCargo1": Number($(AFTcargo1).val()),
+        "AftCargo2": Number($(AFTcargo2).val()),
+        "AftCargo3": Number($(AFTcargo3).val()),
+        "AftCargo4": Number($(AFTcargo4).val()),
+        "AftCargo5": Number($(AFTcargo5).val()),
+        "AftCargo6": Number($(AFTcargo6).val()),
+        "AgentID_Fk": Number($(Agent).val()),
+        "ActualDepTime": Number($(ATD).val()),
+        "FltRemarks": $(Remarks).val(),
+        "SubManifestColor1": $(ManifestColor1).val(),
+        "SubManifestColor1Wgt": Number($(UsefulWeight1).val()),
+        "SubManifestColor2": $(ManifestColor2).val(),
+        "SubManifestColor2Wgt": Number($(UsefulWeight2).val()),
+        "SubManifestColor3": $(ManifestColor3).val(),
+        "SubManifestColor3Wgt": Number($(UsefulWeight3).val()),
+        "SubManifestColor4": $(UsefulWeightColor1).val(),
+        "SubManifestColor4Wgt": Number($(UsefulWeightBeta1).val()),
+        "SubManifestColor5": $(UsefulWeightColor2).val(),
+        "SubManifestColor5Wgt": Number($(UsefulWeightBeta2).val()),
+        "SubManifestColor6": $(UsefulWeightColor3).val(),
+        "SubManifestColor6Wgt": Number($(UsefulWeightBeta3).val()),
+
+    };
+
+       postRequest(BaseUrl +"/DashBoard/AddFlight", data, function (res) {
+        debugger
+        if (res.status == 200)
+        {
+            if (res.data && res.data != null) {
+
+
+                swal({
+                    title: "Success",
+                    text: "Submission was successful.",
+                    icon: "success",
+                    dangerMode: false,
+                });
+
+
+             }
+        }
+        if (res.Status == 401) {
+            LoaderHide();
+            localStorage.removeItem("Menu");
+            localStorage.removeItem("userData");
+            window.location.href = baseWebUrl + "Account/Authenticate";
+        }
+        if (res.Status == 403) {
+
+
+            swal(res.ResponseMsg, {
+                icon: "error",
+                title: "Error",
+            });
+        }
+        if (res.Status == 500) {
+            LoaderHide();
+            swal({
+                title: "Error",
+                text: res.ResponseMsg,
+                icon: "error",
+                dangerMode: true,
+            })
+        }
+
+        if (res.Status == 420) {
+            LoaderHide();
+            localStorage.removeItem("Menu");
+            localStorage.removeItem("userData");
+            window.location.href = baseWebUrl + "Account/Authenticate";
+        }
+
+        if (res.Status == 600) {
+
+            swal({
+                title: "Error",
+                text: res.ResponseMsg,
+                icon: "error",
+                dangerMode: true,
+            })
+        }
+
+    });
+
+
+}
+
+function UpdateFlight() {
+
+    var FlightColor = `${$(FlightColor1).val()},${$(FlightColor2).val()}`;
+    var SubManifest = `${$(ManifestColor1).val() != null && $(ManifestColor1).val() != -1 ? $(ManifestColor1).val() : "---"}${$(UsefulWeight1).val() > 0 ? $(UsefulWeight1).val() : "---"},${$(ManifestColor2).val() != null && $(ManifestColor2).val() != -1 ? $(ManifestColor2).val() : "---"}${$(UsefulWeight2).val() > 0 ? $(UsefulWeight2).val() : "---"},${$(ManifestColor3).val() != null && $(ManifestColor3).val() != -1 ? $(ManifestColor3).val() : "---"}${$(UsefulWeight3).val() > 0 ? $(UsefulWeight3).val() : "---"},${$(UsefulWeightColor1).val() != null && $(UsefulWeightColor1).val() != -1 ? $(UsefulWeightColor1).val() : "---"}${$(UsefulWeightBeta1).val() > 0 ? $(UsefulWeightBeta1).val() : "---"},${$(UsefulWeightColor2).val() != null && $(UsefulWeightColor2).val() != -1 ? $(UsefulWeightColor2).val() : "---"}${$(UsefulWeightBeta2).val() > 0 ? $(UsefulWeightBeta2).val() : "---"},${$(UsefulWeightColor3).val() != null && $(UsefulWeightColor3).val() != -1 ? $(UsefulWeightColor3).val() : "---"}${$(UsefulWeightBeta3).val() > 0 ? $(UsefulWeightBeta3).val() : "---"}`;
+    var checkedRCS = $(RCS).is(':checked');
+    var checkedSeatMap = $(SeatMap).is(':checked');
+    var checkedSplitGender = $(SplitGender).is(':checked');
+    var data = {
+        "FltID": Number($("#FLTId").val()),
+        "FltDateTime": $(ETD).val(),
+        "FltNumber": $(FlightNumber).val(),
+        "SeatMap": checkedSeatMap,
+        "DestID": Number($(Dest1).val()),
+        "DestID2": Number($(Dest2).val()),
+        "AircraftID_Fk": Number($(AircraftType).val()),
+        "ShowRCS": checkedRCS,
+        "FltColor": FlightColor,
+        "FltRoute": $(Route).val(),
+        "SubManifestColor": SubManifest,
+        "PilotID1_Fk": Number($(Pilot1).val()),
+        "PilotID2_Fk": Number($(Pilot2).val()),
+        "PilotID3_Fk": Number($(Observer).val()),
+        "FAID1_FK": Number($(FA1).val()),
+        "FAID2_FK": Number($(FA2).val()),
+        "CustID_Fk": Number($(Customer).val()),
+        //       /* PaxList: PaxList,*/
+        "Fuel": Number($(Fuel).val()),
+        "SplitGender": checkedSplitGender,
+        ///* MaxCargo: Number(MaxCargo),*/
+        "Temperature": Number($(Temperature).val()),
+
+        "RsrvdSeats": Number($(RsrvdSeats).val()),
+
+        "GateNum": $(GateNumber).val(),
+        "FltStatus_Fk": Number($(FlightStatus).val()),
+
+        //// Frt: Frt,
+
+        ////Bag: Bag,
+
+        ////FrtBagTotal: FrtBagTotal,
+        //        Payload : 0,
+
+        "FwdCargo1": Number($(FWDcargo1).val()),
+
+        "FwdCargo2": Number($(FWDcargo2).val()),
+
+        "FwdCargo3": Number($(FWDcargo3).val()),
+
+        "FwdCargo4": Number($(FWDcargo4).val()),
+
+        "AftCargo1": Number($(AFTcargo1).val()),
+
+        "AftCargo2": Number($(AFTcargo2).val()),
+
+        "AftCargo3": Number($(AFTcargo3).val()),
+
+        "AftCargo4": Number($(AFTcargo4).val()),
+
+        "AftCargo5": Number($(AFTcargo5).val()),
+
+        "AftCargo6": Number($(AFTcargo6).val()),
+
+        "AgentID_Fk": Number($(Agent).val()),
+        "ActualDepTime": Number($(ATD).val()),
+        "FltRemarks": $(Remarks).val(),
+
+        "SubManifestColor1": $(ManifestColor1).val(),
+        "SubManifestColor1Wgt": Number($(UsefulWeight1).val()),
+        "SubManifestColor2": $(ManifestColor2).val(),
+        "SubManifestColor2Wgt": Number($(UsefulWeight2).val()),
+        "SubManifestColor3": $(ManifestColor3).val(),
+        "SubManifestColor3Wgt": Number($(UsefulWeight3).val()),
+        "SubManifestColor4": $(UsefulWeightColor1).val(),
+        "SubManifestColor4Wgt": Number($(UsefulWeightBeta1).val()),
+        "SubManifestColor5": $(UsefulWeightColor2).val(),
+        "SubManifestColor5Wgt": Number($(UsefulWeightBeta2).val()),
+        "SubManifestColor6": $(UsefulWeightColor3).val(),
+        "SubManifestColor6Wgt": Number($(UsefulWeightBeta3).val()),
+
+    };
+
+    const Id = $("#FLTId").val();
+      if (Id > 0) {
+
+
+          postRequest(BaseUrl+"/DashBoard/UpdateFlight", data, function (res) {
+
+            debugger
+            if (res.status == 200) {
+                if (res.data && res.data != null) {
+                    debugger;
+
+                    swal({
+                        title: "Success",
+                        text: "Update successfuly.",
+                        icon: "success",
+                        dangerMode: false,
+                    });
+
+                }
+            }
+            if (res.Status == 401) {
+                LoaderHide();
+                localStorage.removeItem("Menu");
+                localStorage.removeItem("userData");
+                window.location.href = baseWebUrl + "Account/Authenticate";
+            }
+            if (res.Status == 403) {
+
+
+                swal(res.ResponseMsg, {
+                    icon: "error",
+                    title: "Error",
+                });
+            }
+            if (res.Status == 500) {
+                LoaderHide();
+                swal({
+                    title: "Error",
+                    text: res.ResponseMsg,
+                    icon: "error",
+                    dangerMode: true,
+                })
+            }
+
+            if (res.Status == 420) {
+                LoaderHide();
+                localStorage.removeItem("Menu");
+                localStorage.removeItem("userData");
+                window.location.href = baseWebUrl + "Account/Authenticate";
+            }
+
+            if (res.Status == 600) {
+
+                swal({
+                    title: "Error",
+                    text: res.ResponseMsg,
+                    icon: "error",
+                    dangerMode: true,
+                })
+            }
+
+        });
+
+    } else {
+
+        swal("Please Select row Table After Update", {
+            icon: "error",
+            title: "Error",
+            dangerMode: true,
+        });
+    }
+}
+
+
+
 
 
 function postRequest(url, requestData, handledata) {
