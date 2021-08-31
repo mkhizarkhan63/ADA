@@ -1,5 +1,6 @@
 ﻿using ADA.API.Utility;
 using ADAClassLibrary;
+using ADAClassLibrary.DTOLibraries;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -53,13 +54,13 @@ namespace ADA.API.Controllers
         [HttpPost("Add")]
         public Response Add([FromBody] Flight obj)
         {
-            // ClaimDTO claimDTO = null;
+            ClaimDTO claimDTO = null;
             Response response = new Response();
 
             try
             {
-                //  claimDTO = TokenManager.GetValidateToken(Request);
-                // if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
+                claimDTO = TokenManager.GetValidateToken(Request);
+                if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
                 // var Permissions = JsonConvert.DeserializeObject<List<string>>(claimDTO.Permissions);
                 //  bool HasPermission = true;
                 // if (!claimDTO.DesignationId.Contains(1))
@@ -82,7 +83,7 @@ namespace ADA.API.Controllers
                 //obj.CreatedBy = claimDTO.UserId;
                 var res = services.flightService.AddFlight(obj);
                 response = CustomStatusResponse.GetResponse(200);
-                // response.Token = TokenManager.GenerateToken(claimDTO);
+               response.Token = TokenManager.GenerateToken(claimDTO);
                 if (res != null)
                 {
 
@@ -109,7 +110,7 @@ namespace ADA.API.Controllers
                 //_loggerService.CreateLog(Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "Add", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 600, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
 
                 response = CustomStatusResponse.GetResponse(600);
-                //response.Token = TokenManager.GenerateToken(claimDTO);
+                response.Token = TokenManager.GenerateToken(claimDTO);
                 //if (IsDBExceptionEnabeled)
                 //{
                 //    response.ResponseMsg = "An Error Occured";
@@ -139,12 +140,12 @@ namespace ADA.API.Controllers
         public Response Update(Flight obj)
         {
 
-            //ClaimDTO claimDTO = null;
+            ClaimDTO claimDTO = null;
             Response response = new Response();
             try
             {
-                //claimDTO = TokenManager.GetValidateToken(Request);
-                //if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
+                claimDTO = TokenManager.GetValidateToken(Request);
+                if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
 
                 //var Permissions = JsonConvert.DeserializeObject<List<string>>(claimDTO.Permissions);
                 ////   string Controller = ControllerContext.ActionDescriptor.ControllerName;
@@ -168,7 +169,7 @@ namespace ADA.API.Controllers
                 //obj.CreatedBy = claimDTO.UserId;
                 var res = services.flightService.UpdateFlight(obj);
                 response = CustomStatusResponse.GetResponse(200);
-                // response.Token = TokenManager.GenerateToken(claimDTO);
+                 response.Token = TokenManager.GenerateToken(claimDTO);
                 if (res != null)
                 {
                     #region Set New Entry In Cache
@@ -227,9 +228,12 @@ namespace ADA.API.Controllers
 
         [HttpPost("GetAllDropdowns")]
         public Response GetAllDropDowns()
-        {
+        {   
+            
+            ClaimDTO claimDTO = null;
             Response response = new Response();
-
+            claimDTO = TokenManager.GetValidateToken(Request);
+            if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
             try
             {
                
@@ -239,7 +243,7 @@ namespace ADA.API.Controllers
                 if (res != null)
                 {
                     response.Data = res;
-                    response.ResponseMsg = "Data save successfully!";
+                    response.Token = TokenManager.GenerateToken(claimDTO);
                 }
                 return response;
 
@@ -252,7 +256,7 @@ namespace ADA.API.Controllers
                 //_loggerService.CreateLog(Convert.ToString(Request.Path.HasValue == false ? "" : Request.Path.Value), _controllerName, "Add", claimDTO.Username, Convert.ToInt32(claimDTO.UserId), claimDTO.RoleId, 600, Convert.ToString(ex.Message), Convert.ToString(ex.InnerException));
 
                 response = CustomStatusResponse.GetResponse(600);
-                //response.Token = TokenManager.GenerateToken(claimDTO);
+                response.Token = TokenManager.GenerateToken(claimDTO);
                 //if (IsDBExceptionEnabeled)
                 //{
                 //    response.ResponseMsg = "An Error Occured";
@@ -281,26 +285,27 @@ namespace ADA.API.Controllers
         [HttpPost("GetAll")]
         public Pagination GetAll()
         {
-           // ClaimDTO claimDTO = null;
+            ClaimDTO claimDTO = null;
             try
             {
-               // claimDTO = TokenManager.GetValidateToken(Request);
+                claimDTO = TokenManager.GetValidateToken(Request);
 
-                //if (claimDTO == null)
-                //{
-                    //Pagination response = new Pagination()
-                    //{
-                    //    draw = "",
-                    //    recordsFiltered = 0,
-                    //    recordsTotal = 0,
-                    //    Status = 401,
-                    //    ResponseMsg = "unauthorized",
-                    //    Token = null,
-                    //    Data = null
-                    //};
-                    //return response;
-               // }
-               // var Permissions = JsonConvert.DeserializeObject<List<string>>(claimDTO.Permissions);
+                if (claimDTO == null)
+                {
+                    Pagination response = new Pagination()
+                    {
+                        draw = "",
+                        recordsFiltered = 0,
+                        recordsTotal = 0,
+                        Status = 401,
+                        ResponseMsg = "unauthorized",
+                        Token = null,
+                        Data = null
+                    };
+
+                    return response;
+                }
+                // var Permissions = JsonConvert.DeserializeObject<List<string>>(claimDTO.Permissions);
                 //string Controller = ControllerContext.ActionDescriptor.ControllerName;
                 //bool HasPermission = true;
                 //if (!claimDTO.DesignationId.Contains(1))
@@ -311,20 +316,20 @@ namespace ADA.API.Controllers
                 //        HasPermission = true;
                 //    }
                 //}
-               // //if (!HasPermission)
-               // //{
-               // //    Pagination response = new Pagination()
-               //     {
-               //         draw = "",
-               //         recordsFiltered = 0,
-               //         recordsTotal = 0,
-               //         Status = 403,
-               //         ResponseMsg = "You don’t have permission to this action.",
-               //       // Token = TokenManager.GenerateToken(claimDTO),
-               //         Data = null
-               //     };
-               //     return response;
-               //// }
+                // //if (!HasPermission)
+                // //{
+                // //    Pagination response = new Pagination()
+                //     {
+                //         draw = "",
+                //         recordsFiltered = 0,
+                //         recordsTotal = 0,
+                //         Status = 403,
+                //         ResponseMsg = "You don’t have permission to this action.",
+                //       // Token = TokenManager.GenerateToken(claimDTO),
+                //         Data = null
+                //     };
+                //     return response;
+                //// }
                 //HttpRequestMessage 
                 //HttpRequestMessage m = new HttpRequestMessage();
                 //var draw1 = HttpContext.Request.Form.Keys;
@@ -423,7 +428,7 @@ namespace ADA.API.Controllers
                     recordsFiltered = recordsTotal,
                     recordsTotal = recordsTotal,
                     Status = 200,
-                    //Token = TokenManager.GenerateToken(claimDTO),
+                    Token = TokenManager.GenerateToken(claimDTO),
                     Data = Data
                 };
                 return pagination;
@@ -437,8 +442,8 @@ namespace ADA.API.Controllers
                 {
 
                     //ResponseMsg = IsDBExceptionEnabeled ? "An Error Occured" : ex.Message,
-                    //Status = 600,
-                   // Token = TokenManager.GenerateToken(claimDTO),
+                    Status = 600,
+                   Token = TokenManager.GenerateToken(claimDTO),
                     Data = null,
                 };
                 return pagination;
@@ -450,9 +455,9 @@ namespace ADA.API.Controllers
 
                 Pagination pagination = new Pagination()
                 {
-                    //ResponseMsg = "Internal server error!",
-                    //Status = 500,
-                    //Token = TokenManager.GenerateToken(claimDTO),
+                    ResponseMsg = "Internal server error!",
+                    Status = 500,
+                    Token = TokenManager.GenerateToken(claimDTO),
                     Data = null,
                 };
                 return pagination;
@@ -465,13 +470,13 @@ namespace ADA.API.Controllers
         public Response GetFlightBtID(int Id)
         {
 
-            //ClaimDTO claimDTO = null;
+            ClaimDTO claimDTO = null;
             Response response = new Response();
 
             try
             {
-                //claimDTO = TokenManager.GetValidateToken(Request);
-                //if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
+                claimDTO = TokenManager.GetValidateToken(Request);
+                if (claimDTO == null) return CustomStatusResponse.GetResponse(401);
 
 
 
@@ -480,7 +485,7 @@ namespace ADA.API.Controllers
                 //var res = _service.GetBranchById(id);
 
                 response = CustomStatusResponse.GetResponse(200);
-                //response.Token = TokenManager.GenerateToken(claimDTO);
+                response.Token = TokenManager.GenerateToken(claimDTO);
                 if (res != null)
                 {
                     //var provinceCache = new CacheManager<Province>(_memoryCache, _provinceService).TryGetValue(provinceCacheName).Where(x => x.CountryId == res.CountryId).ToList();

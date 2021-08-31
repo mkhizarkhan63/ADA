@@ -1,6 +1,9 @@
 using ADA.API.Helpers;
+using ADA.API.IRepositories;
+using ADA.API.Repositories;
+using ADA.API.Services;
 using ADA.API.Utility;
-using Auth.Authorization;
+using ADA.IServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,8 +40,10 @@ namespace ADA.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ADA.API", Version = "v1" });
             });
+            services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddServices();
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,9 +65,6 @@ namespace ADA.API
             app.UseAuthorization();
             // global error handler
             app.UseMiddleware<ErrorHandlerMiddleware>();
-
-            // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

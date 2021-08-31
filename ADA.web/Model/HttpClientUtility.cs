@@ -25,15 +25,15 @@ namespace ADA.web.Models
                       .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Url);
-                //if (!String.IsNullOrEmpty(httpContext.Session.GetString("authorization")))
-                //    request.Headers.Add("authorization", httpContext.Session.GetString("authorization"));
+                if (!String.IsNullOrEmpty(httpContext.Session.GetString("authorization")))
+                    request.Headers.Add("authorization", httpContext.Session.GetString("authorization"));
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 HttpResponseMessage Res = await client.SendAsync(request);
                 if (Res.IsSuccessStatusCode)
                 {
                     var response = Res.Content.ReadAsStringAsync().Result;
                     var obj = JsonConvert.DeserializeObject<Response>(response);
-                    //httpContext.Session.SetString("authorization", obj.Token == null ? "" : obj.Token);
+                    httpContext.Session.SetString("authorization", obj.Token == null ? "" : obj.Token);
                     return response;
 
                 }
@@ -41,6 +41,7 @@ namespace ADA.web.Models
                     return null;
             }
         }
+
 
         public static async Task<object> CustomHttpForGetAll(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
@@ -61,15 +62,17 @@ namespace ADA.web.Models
                 request.Headers.Add("sortColumnDir", httpContext.Request.Form["order[0][dir]"].FirstOrDefault());
                 request.Headers.Add("searchValue", httpContext.Request.Form["search[value]"].FirstOrDefault());
 
-                //if (!String.IsNullOrEmpty(httpContext.Session.GetString("authorization")))
-                   // request.Headers.Add("authorization", httpContext.Session.GetString("authorization"));
+              
+
+                if (!String.IsNullOrEmpty(httpContext.Session.GetString("authorization")))
+                    request.Headers.Add("authorization", httpContext.Session.GetString("authorization"));
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 HttpResponseMessage Res = await client.SendAsync(request);
                 if (Res.IsSuccessStatusCode)
                 {
                     var response = Res.Content.ReadAsStringAsync().Result;
                     var obj = JsonConvert.DeserializeObject<Response>(response);
-                    //httpContext.Session.SetString("authorization", obj.Token == null ? "" : obj.Token);
+                    httpContext.Session.SetString("authorization", obj.Token == null ? "" : obj.Token);
                     return response;
 
                 }
@@ -77,6 +80,8 @@ namespace ADA.web.Models
                     return null;
             }
         }
+
+
 
         public static async Task<object> CustomHttpForTargetGetAllWithCustomParameters(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
