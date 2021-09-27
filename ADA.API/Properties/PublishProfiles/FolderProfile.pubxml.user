@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\AlphaData\Desktop\apipublish</_PublishTargetUrl>
+    <History>True|2021-09-19T12:12:53.6603980Z;True|2021-09-19T16:01:44.2445449+04:00;True|2021-09-19T15:42:51.3762658+04:00;True|2021-09-19T15:42:27.1443763+04:00;True|2021-09-19T15:41:39.9428983+04:00;True|2021-09-19T15:24:33.2750160+04:00;True|2021-09-19T14:42:14.6004906+04:00;True|2021-09-19T14:24:45.8527167+04:00;True|2021-09-19T14:13:58.9974532+04:00;True|2021-09-19T13:36:22.0278994+04:00;True|2021-09-19T13:28:45.7723449+04:00;True|2021-09-19T10:02:22.1070185+04:00;True|2021-09-19T09:51:59.7385781+04:00;True|2021-09-19T09:39:21.6540502+04:00;True|2021-09-18T20:22:41.7495950+04:00;</History>
+  </PropertyGroup>
+</Project>

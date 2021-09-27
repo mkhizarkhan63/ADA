@@ -16,10 +16,10 @@ namespace ADA.API.Services
         {
             _flightRepository = flightRepository;
         }
-        public Flight AddFlight(Flight flight)
+        public Flight Add(Flight obj)
         {
-            flight.FltTimeStamp = DateTime.Now;
-            return _flightRepository.Add(flight);
+     
+            return _flightRepository.Add(obj);
         }
 
         public List<Flight> GetAll()
@@ -31,21 +31,21 @@ namespace ADA.API.Services
         {
             return _flightRepository.GetFlightsDropDown();
         }
+        public object GetAircraftType(string type)
+        {
+            return _flightRepository.GetAircraftType(type);
+        }
 
         public Flight GetFlightBtID(int id)
         {
             return _flightRepository.GetByID(id);
         }
 
-        public Flight UpdateFlight(Flight flight)
-        {
-            flight.FltTSEdit = DateTime.Now;
 
-            if(flight.FltStatus_Fk == 3)
-            {
-                flight.ClosingTimeStamp = DateTime.Now;
-            }
-            return _flightRepository.Update(flight);
+        public Flight Update(Flight obj)
+        {
+            
+            return _flightRepository.Update(obj);
         }
-    }
+}
 }

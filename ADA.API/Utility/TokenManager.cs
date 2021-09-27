@@ -25,24 +25,15 @@ namespace ADA.API.Utility
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
+                   new Claim("UserId",Convert.ToString(obj.UserId)),
                     new Claim("Username", Convert.ToString(obj.Username)),
-                    //new Claim("UserId",Convert.ToString(obj.UserId)),
-                    new Claim("Email", Convert.ToString(obj.Email)),
-                    new Claim("LoginId", Convert.ToString(obj.LoginId)),
-                    //new Claim("FirstName", Convert.ToString(obj.FirstName)),
-                    //new Claim("LastName", Convert.ToString(obj.LastName)),
-                    new Claim("RoleId", Convert.ToString(obj.RoleId)),
-                    new Claim("RoleName", Convert.ToString(obj.RoleName)),
-                    //new Claim("DesignationId",string.Join(',',obj.DesignationId)),
+                    new Claim("StaffActive",Convert.ToString(obj.StaffActive)),
+                    new Claim("StaffRights",Convert.ToString(obj.StaffRights)),
+                    new Claim("SuperAdminRights",Convert.ToString(obj.SuperAdminRights)),
                    // new Claim("DynamicMenu", obj.DynamicMenu),
                     //new Claim("Permissions", obj.Permissions),
            
-                   // new Claim("MaxDiscountApproval", Convert.ToString(obj.MaxDiscountApproval)),
-          
-                    //new Claim("Companies", string.Join(',',obj.Companies)),
-                    //new Claim("Branches", string.Join(',',obj.Branches)),
-                    //new Claim("Factories", string.Join(',',obj.Factories)),
-                    //new Claim("Teams", string.Join(',',obj.Teams)),
+                 
                 }
                 ),
                 Issuer = "Envicrete",
@@ -111,54 +102,33 @@ namespace ADA.API.Utility
             {
                 return null;
             }
+            Claim userId = identity.FindFirst("UserId");
             Claim userName = identity.FindFirst("Username");
-           // Claim userId = identity.FindFirst("UserId");
-            Claim email = identity.FindFirst("Email");
-            Claim loginId = identity.FindFirst("LoginId");
-            //Claim firstName = identity.FindFirst("FirstName");
-            //Claim lastName = identity.FindFirst("LastName");
-            Claim roleId = identity.FindFirst("RoleId");
-            Claim rolename = identity.FindFirst("RoleName");
-            //Claim designationId = identity.FindFirst("DesignationId");
-           // Claim dynamicMenu = identity.FindFirst("DynamicMenu");
-           // Claim permissions = identity.FindFirst("Permissions");
-           // Claim maxDiscountApproval = identity.FindFirst("MaxDiscountApproval");
 
-            //Claim companies = identity.FindFirst("Companies");
-            //Claim branches = identity.FindFirst("Branches");
-            //Claim factories = identity.FindFirst("Factories");
-            //Claim teams = identity.FindFirst("Teams");
+            Claim staffActive = identity.FindFirst("StaffActive");
+            Claim staffRights = identity.FindFirst("StaffRights");
+            Claim superAdminRights = identity.FindFirst("SuperAdminRights");
+
+            // Claim dynamicMenu = identity.FindFirst("DynamicMenu");
+            // Claim permissions = identity.FindFirst("Permissions");
+
 
             obj.Username = userName.Value;
-            //obj.UserId = Convert.ToInt32(userId.Value);
-            obj.Email = email.Value;
-            obj.LoginId = Convert.ToInt32(loginId.Value);
-           // obj.FirstName = firstName.Value;
-           // obj.LastName = lastName.Value;
-            obj.RoleId = Convert.ToInt32(roleId.Value);
-            obj.RoleName = rolename.Value;
-            //obj.MaxDiscountApproval= Convert.ToInt32(maxDiscountApproval.Value);
-            //if (designationId.Value != null && designationId.Value != "")
+            obj.UserId = Convert.ToInt32(userId.Value);
+            obj.StaffRights = Convert.ToBoolean(staffRights.Value);
+            obj.SuperAdminRights = Convert.ToBoolean(superAdminRights.Value);
+            obj.StaffActive = Convert.ToBoolean(staffActive.Value);
+            //if (roleId.Value != null && roleId.Value != "")
             //{
-            //    obj.DesignationId = designationId.Value.Split(',').Select(x => int.Parse(x)).ToList();
+            //    obj.RoleId = roleId.Value.Split(',').Select(x => int.Parse(x)).ToList();
             //}
             //else
             //{
-            //    obj.DesignationId = new List<int>();
+            //    obj.RoleId = new List<int>();
             //}
-           // obj.DynamicMenu = dynamicMenu.Value;
+            // obj.DynamicMenu = dynamicMenu.Value;
             //obj.Permissions = permissions.Value;
-            //obj.MaxApprovalAmount = Convert.ToDecimal(maxApprovalAmount.Value);
-            //obj.MinApprovalAmount = Convert.ToDecimal(minApprovalAmount.Value);
-            //obj.GeoLocation = Convert.ToInt32(geoLocation.Value);
-
-            //List<decimal> maxApproveAmount = new List<decimal>();
-            //if (maxApprovalAmount.Value != null && maxApprovalAmount.Value != "")
-            //{
-            //    maxApproveAmount = maxApprovalAmount.Value.Split(',').Select(x => decimal.Parse(x.Trim())).ToList();
-            //    obj.MaxApprovalAmount = maxApproveAmount;
-            //}
-
+            
 
             //user = userClaim.Value;
             return obj;

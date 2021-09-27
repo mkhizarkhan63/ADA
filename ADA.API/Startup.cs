@@ -1,5 +1,6 @@
 using ADA.API.Helpers;
 using ADA.API.IRepositories;
+using ADA.API.IServices;
 using ADA.API.Repositories;
 using ADA.API.Services;
 using ADA.API.Utility;
@@ -42,6 +43,10 @@ namespace ADA.API
             });
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IUsersRepositery, UsersRepositery>();
+            services.AddTransient<IUserService, UsersService>();
             services.AddServices();
 
         }
@@ -62,14 +67,16 @@ namespace ADA.API
 
             app.UseRouting();
 
-            app.UseAuthorization();
-            // global error handler
+         
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+          
+
         }
     }
 }

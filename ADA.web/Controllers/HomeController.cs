@@ -20,7 +20,7 @@ namespace ADA.web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("https://localhost:44383/Dashboard");
         }
 
         public IActionResult Privacy()

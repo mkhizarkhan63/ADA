@@ -15,14 +15,21 @@ namespace ADA.web.Models
     {
         public static async Task<object> CustomHttp(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
-            using (var client = new HttpClient())
-            {
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-                client.BaseAddress = new Uri(BaseUrl);
+            //using (var client = new HttpClient(clientHandler))
+            //{
+               using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(BaseUrl);
 
                 client.DefaultRequestHeaders
                       .Accept
                       .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+               
+
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Url);
                 if (!String.IsNullOrEmpty(httpContext.Session.GetString("authorization")))
@@ -45,6 +52,9 @@ namespace ADA.web.Models
 
         public static async Task<object> CustomHttpForGetAll(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
             using (var client = new HttpClient())
             {
 
@@ -62,7 +72,7 @@ namespace ADA.web.Models
                 request.Headers.Add("sortColumnDir", httpContext.Request.Form["order[0][dir]"].FirstOrDefault());
                 request.Headers.Add("searchValue", httpContext.Request.Form["search[value]"].FirstOrDefault());
 
-              
+
 
                 if (!String.IsNullOrEmpty(httpContext.Session.GetString("authorization")))
                     request.Headers.Add("authorization", httpContext.Session.GetString("authorization"));
@@ -83,8 +93,11 @@ namespace ADA.web.Models
 
 
 
-        public static async Task<object> CustomHttpForTargetGetAllWithCustomParameters(string BaseUrl, string Url, string content, HttpContext httpContext)
+        public static async Task<object> CustomHttpForFlightGetAllWithCustomParameters(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
             using (var client = new HttpClient())
             {
 
@@ -101,12 +114,9 @@ namespace ADA.web.Models
                 request.Headers.Add("sortColumn", httpContext.Request.Form["columns[" + httpContext.Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault());
                 request.Headers.Add("sortColumnDir", httpContext.Request.Form["order[0][dir]"].FirstOrDefault());
                 request.Headers.Add("searchValue", httpContext.Request.Form["search[value]"].FirstOrDefault());
-                request.Headers.Add("CompanyName", httpContext.Request.Form["columns[1][search][value]"].FirstOrDefault());
-                request.Headers.Add("BranchName", httpContext.Request.Form["columns[2][search][value]"].FirstOrDefault());
-                request.Headers.Add("TargetYear", httpContext.Request.Form["columns[3][search][value]"].FirstOrDefault());
-                request.Headers.Add("TargetType", httpContext.Request.Form["columns[4][search][value]"].FirstOrDefault());
-                request.Headers.Add("Quarter", httpContext.Request.Form["columns[5][search][value]"].FirstOrDefault());
-                request.Headers.Add("AssignToTeam", httpContext.Request.Form["columns[9][search][value]"].FirstOrDefault());
+                request.Headers.Add("FromDate", httpContext.Request.Form["columns[0][search][value]"].FirstOrDefault());
+                request.Headers.Add("ToDate", httpContext.Request.Form["columns[1][search][value]"].FirstOrDefault());
+                request.Headers.Add("AirCraftType", httpContext.Request.Form["columns[2][search][value]"].FirstOrDefault());
                 if (!String.IsNullOrEmpty(httpContext.Session.GetString("authorization")))
                     request.Headers.Add("authorization", httpContext.Session.GetString("authorization"));
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
@@ -126,6 +136,9 @@ namespace ADA.web.Models
 
         public static async Task<object> CustomHttpForTeamTargetToMembersGetAllWithCustomParameters(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
             using (var client = new HttpClient())
             {
 
@@ -165,6 +178,9 @@ namespace ADA.web.Models
 
         public static async Task<object> CustomHttpForGetAllWithCustomParameters(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
             using (var client = new HttpClient())
             {
 
@@ -205,6 +221,9 @@ namespace ADA.web.Models
 
         public static async Task<object> CustomHttpForGetAllRegionLeadsManagementCustomParameters(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
             using (var client = new HttpClient())
             {
 
@@ -252,6 +271,9 @@ namespace ADA.web.Models
         }
         public static async Task<object> CustomHttpForGetAllGlobalLeadsManagementCustomParameters(string BaseUrl, string Url, string content, HttpContext httpContext)
         {
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
             using (var client = new HttpClient())
             {
 

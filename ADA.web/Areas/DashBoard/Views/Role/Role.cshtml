@@ -1,0 +1,92 @@
+﻿<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <b style="font-size: 30px;">
+                                Role Setup
+                            </b>
+                        </h3>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <form id="formRole">
+                                    <input type="hidden" id="hdRoleId" value="0" />
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+
+                                                <label class="col-12 control-label">Role Name<span class="mandatory"></span></label>
+                                                <input id="txtRoleName" name="txtRoleName" type="text" maxlength="50" class="form-control form-control-sm" placeholder="Role Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Active</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked="checked" id="chkIsActive">
+                                                    <label class="form-check-label">Active</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row  d-flex justify-content-end pr-2">
+
+                                        <button id="Save" type="button" class="btn btn-sm  shadow  sharp btn-info mt-1 mr-2">Save</button>
+                                        <button id="Edit" type="button" style="display:none" class="btn  btn-sm   shadow  sharp btn-success mr-2 mt-1">Update</button>
+                                        <button id="Clear" type="button" style="display:block" class="btn  btn-sm   shadow  sharp btn-danger mt-1">Clear</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <div class="card">
+
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="dt_Role" class=" table table-bordered  table-striped" style="width:100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th>ID</th>
+                                        <th>Role Name</th>
+                                        <th>Active</th>
+                                        <th>Last Modified</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </section>
+
+        </div>
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+
+@section scripts {
+ <script src="@Url.Content("~/js/Role.js")"></script>
+}

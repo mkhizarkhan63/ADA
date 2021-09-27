@@ -8,11 +8,14 @@ namespace ADA.API.IServices
 {
    public interface IFlightService : IService<Flight>
     {
-        Flight AddFlight(Flight flight);
-        Flight UpdateFlight(Flight flight);
+        Flight Add(Flight obj);
+        Flight Update(Flight obj);
 
         Flight GetFlightBtID(int id);
 
         object GetDropdownValues();
+
+
+        object GetAircraftType(string type);
     }
 }

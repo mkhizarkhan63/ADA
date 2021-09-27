@@ -1,0 +1,191 @@
+﻿<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <b style="font-size: 30px;">
+                               Manage User Setup
+                            </b>
+                        </h3>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <form id="formUser">
+                                    <input type="hidden" id="hdUserId" value="0" />
+                                    <div class="row">
+
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+
+                                                <label class="col-12 control-label">Employee Number<span class="mandatory"> </span></label>
+                                                <input id="EmpNum" name="EmpNum" type="text" maxlength="50" class="form-control codeonly form-control-sm onlyLetter" placeholder="First Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+
+                                                <label class="col-12 control-label">Staff Surname<span class="mandatory"> </span></label>
+                                                <input id="StaffSurname" name="StaffSurname" maxlength="50" type="text" class="form-control codeonly form-control-sm onlyLetter" placeholder="Last Name">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="col-12 control-label">Staff Group<span class="mandatory"> </span></label>
+                                                <select class="form-control form-control-sm selectpicker " id="StaffGrp" name="StaffGrp" data-size="3" data-show-subtext="true" multiple data-live-search="true" data-max-options="1" title="Select Staff Group">
+                                                <option value="CM">CM</option>
+                                                <option value="AL">AL</option>
+                                                <option value="FW">FW</option>
+                                                <option value="RP">RP</option>
+                                                
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="col-12 control-label">Select Role<span class="mandatory"> </span></label>
+                                                <select class="form-control form-control-sm selectpicker " id="ddlRoles" name="ddlRoles" data-size="3" data-show-subtext="true" multiple data-live-search="true" data-max-options="1" title="Select User Role">
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                    </div>
+                                    <hr />
+
+                                   <h3><b>Login Credentials</b></h3>
+
+                                   <div class="row mt-3 pb-2">
+
+
+
+                                       <div class="col-sm-2">
+                                           <div class="form-group">
+
+                                               <label class="col-12 control-label">Staff Name<span class="mandatory"></span></label>
+                                               <input id="StaffName" name="StaffName" type="text" class="form-control codeonly form-control-sm" placeholder="Length between 4-32" autocomplete="off" maxlength="32">
+                                           </div>
+                                       </div>
+                                       <div class="col-sm-2">
+                                           <div class="form-group">
+
+                                               <label class="col-12 control-label">Staff Password<span class="mandatory"></span></label>
+
+                                               <input id="StaffPwd" maxlength="32" name="loginPassword" type="password" class="form-control form-control-sm" autocomplete="new-password" placeholder="Length between 4-32">
+
+
+                                           </div>
+                                       </div>
+
+                                       <div class="col-sm-2">
+
+                                           <div class="form-group">
+                                               <label>Staff Rights</label>
+                                               <div class="form-check">
+                                                   <input class="form-check-input" type="checkbox" checked="checked" id="StaffRightsActive">
+                                                   <label class="form-check-label">Staff Rights</label>
+                                               </div>
+
+                                           </div>
+                                       </div>
+
+                                       <div class="col-sm-3">
+
+                                           <div class="form-group">
+                                               <label>Staff Super Admin Rights</label>
+                                               <div class="form-check">
+                                                   <input class="form-check-input" type="checkbox" checked="checked" id="StaffAdminRights">
+                                                   <label class="form-check-label">Staff Super Admin Rights</label>
+                                               </div>
+
+                                           </div>
+                                       </div>
+
+                                       <div class="col-sm-2">
+
+                                           <div class="form-group">
+                                               <label>Staff Active</label>
+                                               <div class="form-check">
+                                                   <input class="form-check-input" type="checkbox" checked="checked" id="chkIsActive">
+                                                   <label class="form-check-label">Staff Active</label>
+                                               </div>
+
+                                           </div>
+                                       </div>
+
+                                   </div>
+
+
+
+
+                                        <div class="row  d-flex justify-content-end pr-2">
+
+                                        <button id="Edit" type="button" class="btn  btn-sm  shadow  sharp btn-success mt-1" style="display:none">Update</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <div class="card">
+
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table id="dt_User" class=" table table-bordered  table-striped" style="width:100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th>Employee Num</th>
+                                        <th>Staff Surname</th>
+                                        <th>Staff Name</th>
+                                        <th>Staff Rights</th>
+                                        <th>Staff Super Admin Rights</th>
+                                        <th>Staff Active</th>
+                                        <th>Staff Group</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </section>
+
+        </div>
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+
+<script type="text/x-handlebars" id="temp_Role">
+    @*<option value="">Select Country</option>*@
+    {{#each this}}
+    <option value="{{id}}">{{roleName}}</option>
+    {{/each}}
+
+</script>
+
+@section scripts {
+    <script src="@Url.Content("~/js/Users.js")"></script>
+}

@@ -33,6 +33,9 @@ namespace ADA.web.Areas.DashBoard.Controllers
         [HttpPost]
         public Task<object> AddFlight([FromBody] Flight obj)
         {
+            obj.FltTimeStamp = DateTime.Now;
+            obj.ClosingAgentID = 1;
+
             string content = JsonConvert.SerializeObject(obj);
            
             return HttpClientUtility.CustomHttp(BaseUrl, "api/Flight/Add", content, HttpContext);
@@ -42,6 +45,11 @@ namespace ADA.web.Areas.DashBoard.Controllers
         [HttpPost]
         public Task<object> UpdateFlight([FromBody] Flight obj)
         {
+
+            obj.FltTSEdit = DateTime.Now;
+            obj.ClosingAgentID = 1;
+
+
             string content = JsonConvert.SerializeObject(obj);
            
             return HttpClientUtility.CustomHttp(BaseUrl, "api/Flight/Update", content, HttpContext);
@@ -60,7 +68,7 @@ namespace ADA.web.Areas.DashBoard.Controllers
         public Task<object> GetAllFlights()
         {
             string content = "";
-            return HttpClientUtility.CustomHttpForGetAll(BaseUrl, "api/Flight/GetAll", content, HttpContext);
+            return HttpClientUtility.CustomHttpForFlightGetAllWithCustomParameters(BaseUrl, "api/Flight/GetAll", content, HttpContext);
         }
         [Route("GetFLightByID/{Id}")]
         [HttpPost]
@@ -68,6 +76,14 @@ namespace ADA.web.Areas.DashBoard.Controllers
         {
             string content = "";
             return HttpClientUtility.CustomHttp(BaseUrl, "api/Flight/GetFlightBtID/" + Id, content, HttpContext);
+        }
+
+        [Route("GetAircraftType")]
+        [HttpPost]
+        public Task<object> GetAircraftType(string value)
+        {
+            string content = "";
+            return HttpClientUtility.CustomHttp(BaseUrl, "api/Flight/GetAircraftType?value="+value, content, HttpContext);
         }
 
     }

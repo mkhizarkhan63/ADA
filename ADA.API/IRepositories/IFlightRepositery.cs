@@ -8,13 +8,14 @@ namespace ADA.API.IRepositories
 {
    public interface IFlightRepositery
     {
-        Flight Add(Flight flight);
+        Flight Add(Flight obj);
 
-        Flight Update(Flight flight);
+        Flight Update(Flight obj);
 
         List<Flight> GetAll();
         Flight GetByID(int id);
 
         object GetFlightsDropDown();
+        object GetAircraftType(string type);
     }
 }

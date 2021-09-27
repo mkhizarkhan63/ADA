@@ -29,7 +29,7 @@ namespace ADA.web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         
 
         }
@@ -61,19 +61,6 @@ namespace ADA.web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
-               endpoints.MapControllerRoute(
-                name: "areas",
-                pattern: "{area:exists}/{controller=DashBoard}/{action=Authenticate}/{id?}"
-              );
-
-                endpoints.MapControllerRoute(
-                 name: "areas2",
-                 pattern: "{area:exists}/{controller=DashBoard}/{action=Flight}/{id?}"
-               );
-
-
 
             });
 

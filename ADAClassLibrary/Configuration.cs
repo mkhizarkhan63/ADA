@@ -61,65 +61,44 @@ namespace ADAClassLibrary
 
     }
 
-    public class Pilot {
-
-        public int PilotID { get; set; }
-        public string PilotEmpNum { get; set; }
-        public string PilotSurname { get; set; }
-        public string PilotName { get; set; }
-        public string ACType { get; set; }
-        public bool PilotActive { get; set; }
-
-    }
-
-    public class Staff
+    public class Flight
     {
 
-        public int StaffID { get; set; }
-        public string EmpNum { get; set; }
-        public string StaffSurname { get; set; }
-        public string StaffName { get; set; }
-        public string StaffPwd { get; set; }
-        public bool StaffRights { get; set; }
-        public bool StaffActive { get; set; }
-        public string StaffGrp { get; set; }
-    }
-
-    public class Flight : FlightView
-    {
-       
         public int FltID { get; set; }
-        public DateTime? FltDateTime { get; set; }
+        public string ETD { get; set; }
         public string FltNumber { get; set; }
-
+        public string Destination { get; set; }
+        public string Destination2 { get; set; }
         public int DestID { get; set; }
-        
         public int DestID2 { get; set; }
-        public string FltColor { get; set; }
-        
-        public int FltStatus_Fk { get; set; }
+        public string Status { get; set; }
+        public string Aircraft { get; set; }
+        public int FltTSEditAgentID { get; set; }
+        public int AircraftID { get; set; }
+        public string Color { get; set; }
         public string FltRoute { get; set; }
-        
-        public int PilotID1_Fk { get; set; }
-        
-        public int PilotID2_Fk { get; set; }
-        
-        public int PilotID3_Fk { get; set; }
-        
-        public int FAID1_FK { get; set; }
-        
-        public int FAID2_FK { get; set; }
-        
-        public int FAID3_FK { get; set; }
-        
-        public int FAID4_FK { get; set; }
-        
-        public int CustID_Fk { get; set; }
-        public int RsrvdSeats { get; set; }
-        public bool SeatMap { get; set; }
+        public string Pilot1 { get; set; }
+        public string Pilot2 { get; set; }
+        public string Pilot3 { get; set; }
+        public string FA1 { get; set; }
+        public string FA2 { get; set; }
+        public string FA3 { get; set; }
+        public string FA4 { get; set; }
+        public int Pilot_ID1 { get; set; }
+        public int Pilot_ID2 { get; set; }
+        public int Pilot_ID3 { get; set; }
+        public int FA_ID1 { get; set; }
+        public int FA_ID2 { get; set; }
+        public int FA_ID3 { get; set; }
+        public int FA_ID4 { get; set; }
         public int Payload { get; set; }
         public int Fuel { get; set; }
         public int Temperature { get; set; }
+        public int GateNum { get; set; }
+        public int RsrvdSeats { get; set; }
+        public int CustID { get; set; }
+        public string CustCode { get; set; }
+        public bool UsePaxList { get; set; }
         public int FwdCargo1 { get; set; }
         public int FwdCargo2 { get; set; }
         public int FwdCargo3 { get; set; }
@@ -130,48 +109,46 @@ namespace ADAClassLibrary
         public int AftCargo4 { get; set; }
         public int AftCargo5 { get; set; }
         public int AftCargo6 { get; set; }
-        public string GateNum { get; set; }
-        public DateTime FltTimeStamp { get; set; }
-        
-        public int AgentID_Fk { get; set; }
-        
-        public int ClosingAgentID_Fk { get; set; }
+        public DateTime? FltTimeStamp { get; set; }
+        public string Agent { get; set; }
+        public int AgentID { get; set; }
+        public int ClosingAgentID { get; set; }
         public DateTime? ClosingTimeStamp { get; set; }
+        public DateTime? FltTSEdit { get; set; }
         public int ActualDepTime { get; set; }
+        public bool SeatMap { get; set; }
         public string FltRemarks { get; set; }
         public bool SplitGender { get; set; }
         public string SubManifestColor { get; set; }
         public bool ShowRCS { get; set; }
-        public DateTime? FltTSEdit { get; set; }
-        
-        public int FltTSEditAgentID_Fk { get; set; }
-        
-        public int AircraftID_Fk { get; set; }
+        public string ACType { get; set; }
+
 
 
     }
 
-    public class FlightView:MiniFestColors
-    {
 
-        public string Dest1 { get; set; }
-        public string Dest2 { get; set; }
-        public string FltStatus { get; set; }
-        public string Pilot1 { get; set; }
-        public string Pilot2 { get; set; }
-        public string Pilot3 { get; set; }
-        public string FA1 { get; set; }
-        public string FA2 { get; set; }
-        public string FA3 { get; set; }
-        public string FA4 { get; set; }
-        public string Customer { get; set; }
-        public string Agent { get; set; }
-        public string ClosingAgent { get; set; }
-        public string FltTSEditAgent { get; set; }
-        public string Aircraft { get; set; }
+    public class DropdownList{
+
+
+        public List<Customer> Customer { get; set; }
+        public List<Destination> Destination { get; set; }
+        public List<Pilot> Pilot { get; set; }
+        public List<Staff> Staff { get; set; }
+        public List<AirCraftDropDown> AirCraft { get; set; }
+
+
     }
 
 
+
+
+
+  
+
+
+
+    #region DropDown Class
 
     public class Destination
     {
@@ -186,56 +163,70 @@ namespace ADAClassLibrary
         public string CustDestCode { get; set; }
         public string CustDestName { get; set; }
         public string FIDSName { get; set; }
-        public int FltDest { get; set; }
+        public bool FltDest { get; set; }
     }
-    public class Customer {
+
+
+
+    public class AirCraftDropDown
+    {
+        public int AircraftID { get; set; }
+        public string ACReg { get; set; }
+        public string ACType { get; set; }
+        public bool ACActive { get; set; }
+        public int FWDCargoHold { get; set; }
+        public int AftCargoHold { get; set; }
+
+
+
+
+    }
+
+
+    public class Pilot
+    {
+
+        public int PilotID { get; set; }
+        public string PilotEmpNum { get; set; }
+        public string PilotSurname { get; set; }
+        public string PilotName { get; set; }
+        public string ACType { get; set; }
+        public bool PilotActive { get; set; }
+
+    }
+
+
+
+
+
+    public class Staff
+    {
+
+        public int StaffID { get; set; }
+        public string EmpNum { get; set; }
+        public string StaffSurname { get; set; }
+        public string StaffName { get; set; }
+        public string StaffPwd { get; set; }
+        public bool StaffRights { get; set; }
+        public bool StaffActive { get; set; }
+        public string StaffGrp { get; set; }
+    }
+
+
+
+    public class Customer
+    {
 
         public int CustID { get; set; }
-        public int CustCode { get; set; }
+        public string CustCode { get; set; }
         public string CustName { get; set; }
         public bool UsePaxList { get; set; }
 
 
     }
-    public class FlightStatus {
-
-        public int fltStatusID { get; set; }
-        public string fltStatus { get; set; }
-
-
-    }
 
 
 
-
-    public class DropdownList{
-
-
-        public List<Customer> customer { get; set; }
-        public List<Destination> destination { get; set; }
-        public List<Pilot> pilot { get; set; }
-        public List<Staff> staff { get; set; }
-        public List<Aircraft> arcraft { get; set; }
-        public List<FlightStatus> flightStatus { get; set; }
-
-    }
-
-
-    public class MiniFestColors 
-    {
-        public string SubManifestColor1 { get; set; }
-        public int SubManifestColor1Wgt { get; set; }
-        public string SubManifestColor2 { get; set; }
-        public int SubManifestColor2Wgt { get; set; }
-        public string SubManifestColor3 { get; set; }
-        public int SubManifestColor3Wgt { get; set; }
-        public string SubManifestColor4 { get; set; }
-        public int SubManifestColor4Wgt { get; set; }
-        public string SubManifestColor5 { get; set; }
-        public int SubManifestColor5Wgt { get; set; }
-        public string SubManifestColor6 { get; set; }
-        public int SubManifestColor6Wgt { get; set; }
-
-    }
+    #endregion
 
 }

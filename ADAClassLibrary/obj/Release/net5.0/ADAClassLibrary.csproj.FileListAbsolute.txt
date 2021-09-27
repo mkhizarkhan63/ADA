@@ -1,0 +1,12 @@
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\bin\Release\net5.0\ADAClassLibrary.deps.json
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\bin\Release\net5.0\ADAClassLibrary.dll
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\bin\Release\net5.0\ref\ADAClassLibrary.dll
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\bin\Release\net5.0\ADAClassLibrary.pdb
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ADAClassLibrary.csproj.AssemblyReference.cache
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ADAClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ADAClassLibrary.AssemblyInfoInputs.cache
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ADAClassLibrary.AssemblyInfo.cs
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ADAClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ADAClassLibrary.dll
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ref\ADAClassLibrary.dll
+C:\Users\AlphaData\source\repos\ADA\ADAClassLibrary\obj\Release\net5.0\ADAClassLibrary.pdb

@@ -68,69 +68,66 @@ function Login() {
                 
                 //window.location.href = baseWebUrl + "" + res.Data.IndexPageController + "/" + res.Data.IndexPageAction;
             }
-            if (res.Status == 304) {
+            if (res.status == 304) {
                // $(btnLogin).buttonLoader('stop');
                 localStorage.removeItem("userData");
                 //HideLoader();
                 swal({
                     title: "Error",
-                    text: res.ResponseMsg,
+                    text: res.responseMsg,
                     icon: "error",
                     dangerMode: true,
                 })
             }
-            if (res.Status == 305) {
+            if (res.status == 305) {
                 localStorage.setItem('RedirectionId', res.Data)
                 window.location.href = baseWebUrl + "Account/ExpiredPasswordChanged";
             }
-            if (res.Status == 401) {
+            if (res.status == 401) {
                // $(btnLogin).buttonLoader('stop');
                 localStorage.removeItem("userData");
                 //HideLoader();
                 swal({
                     title: "Error",
-                    text: res.ResponseMsg,
+                    text: res.responseMsg,
                     icon: "error",
                     dangerMode: true,
                 })
             }
-            if (res.Status == 403) {
+            if (res.status == 403) {
                // $(btnLogin).buttonLoader('stop');
                 //HideLoader();
-                swal(res.ResponseMsg, {
+                swal(res.responseMsg, {
                     icon: "error",
                     title: "Error",
                 });
             }
             if (res.status == 320) {
-               // $(btnLogin).buttonLoader('stop');
-                //HideLoader();
-                $('#lblMessage').addClass('text-danger');
-                $('#lblMessage').html('').html(res.ResponseMsg)
+               
 
                 swal({
                     title: "Error",
-                    text: res.ResponseMsg,
+                    text: "Invalid Username and Password",
                     icon: "error",
                     dangerMode: true,
                 })
             }
-            if (res.Status == 500) {
+            if (res.status == 500) {
                // $(btnLogin).buttonLoader('stop');
                 //HideLoader();
                 swal({
                     title: "Error",
-                    text: res.ResponseMsg,
+                    text: res.responseMsg,
                     icon: "error",
                     dangerMode: true,
                 })
             }
-            if (res.Status == 600) {
+            if (res.status == 600) {
                // $(btnLogin).buttonLoader('stop');
                 //HideLoader();
                 swal({
                     title: "Error",
-                    text: res.ResponseMsg,
+                    text: res.responseMsg,
                     icon: "error",
                     dangerMode: true,
                 })
@@ -172,14 +169,14 @@ function postRequest(url, requestData, handledata) {
             "Authorization": GetAuthorizationHeader()
         },
         data: JSON.stringify(requestData),
-        success: function (data, textStatus, xhr) {
+        success: function (data, textstatus, xhr) {
             handledata(data);
 
 
 
 
         },
-        error: function (xhr, textStatus, errorThrown) {
+        error: function (xhr, textstatus, errorThrown) {
             swal({
                 title: "Error",
                 text: "Something Went Wrong!",
